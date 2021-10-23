@@ -1,0 +1,48 @@
+<link rel="stylesheet" href="styles/usercrud.css">
+
+<div id="contenido">
+
+<table id="tabla_buscar_usuarios" width="50%">
+    <form>
+        <td> <input id="input_busqueda" type="text" placeholder="Buscar usuario"> </td>
+        <td> <ion-icon id="search_icon" name="search"></ion-icon></ion-icon> </td>
+    </form>
+</table>
+
+<table id="tabla_usuarios_header">
+    <tr>
+      <th>Usuario</th>
+      <th>Tipo</th>
+      <th>Acciones</th>
+      <th></th>
+  </tr>
+</table>
+
+<div id="table-scroll">
+<table id="tabla_usuarios" width="100%">
+    <tr>
+        <td>nombre_usuario</td>
+        <td>#</td>
+        <td>Modificar</td>
+        <td>Inhabilitar</td>
+    </tr>
+    {{#each usuarios}}
+    <tr>
+        <td>{{usuario}}</td>
+        <td>{{nivel}}</td>
+        <td>Modificar</td>
+        <td>Inhabilitar</td>
+    </tr>
+    {{/each}}
+
+</table>
+</div>
+
+<footer>
+        <button id="btn_nuevo_usuario" class="btn1">Agregar nuevo usuario</button>
+</footer>
+
+</div>
+
+
+
