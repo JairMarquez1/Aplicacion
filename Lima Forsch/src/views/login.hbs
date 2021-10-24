@@ -7,11 +7,11 @@
                 <ul>
                     <li>
                         <span>Usuario</span><br>
-                        <input class="inpt1" id="usuario" type="text" name="usuario"><br>
+                        <input class="inpt1" id="usuario" type="text" name="usuario" required><br>
                     </li>
                     <li>
                         <span>Contraseña</span><br>
-                        <input class="inpt1" id="contrasena" type="password" name="contrasena"><br>
+                        <input class="inpt1" id="contrasena" type="password" name="contrasena" required><br>
                     </li>
                     <li>
                         <button class="btn2" id="btn_iniciar">Iniciar sesión</button>
@@ -19,8 +19,12 @@
                     <li>
                         <a href="#">Recuperar contraseña</a>
                     </li>
+                    <li>
+                        {{error}}
+                    </li>
                 </ul>
             </form>
         </div>
     </div>
 </div>
+
