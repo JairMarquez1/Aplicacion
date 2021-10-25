@@ -11,6 +11,8 @@ router.get('/login', (req,res) => {res.render('login');});
 
 router.get('/usercrud', userController.listar_usuarios);
 
+router.get('/add-user', (req,res) => {res.render('add-user');});
+
 router.post('/iniciar-sesion', userController.iniciar_sesion);
 
 

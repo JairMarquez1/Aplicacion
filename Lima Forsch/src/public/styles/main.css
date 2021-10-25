@@ -23,11 +23,11 @@ body{
 header{
     background-color: #D5FAE8; /*#577064*/
     padding: 12px;
-    height: 15vh;
+    height: 10vh;
 }
 
 #logo{
-    height: 15vh;
+    height: 10vh;
     /*float: left;*/
 }
 

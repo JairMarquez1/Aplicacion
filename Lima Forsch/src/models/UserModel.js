@@ -17,9 +17,9 @@ module.exports = class UserModel{
         return docs;
     }
 
-    /*async agregar(nuevoUsuario){
+    async agregar(nuevoUsuario){
         db.collection('usuarios').add(nuevoUsuario);
-    }*/
+    }
 
 
 }
