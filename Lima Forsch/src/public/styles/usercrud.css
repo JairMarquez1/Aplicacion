@@ -3,9 +3,8 @@ body{
 }
 
 #contenido{
-    margin-left: 16px;
-    width: 95%;
-    height: 80vh;
+    width: 100%;
+    height: 85vh;
     float: left;
 }
 
@@ -18,6 +17,7 @@ body{
     width: 95%;
     outline: none;
     font-size: 18px;
+    margin-left: 16px;
 }
 
 #input_busqueda::placeholder{
@@ -55,23 +55,36 @@ body{
     text-align: start;
     background-color: white;
     padding: 5px 5px;
-    width: 23vw;
+    width: 25%;
 }
 
 #table-scroll {
     height:54vh;
     overflow:auto;  
+    overflow-x: hidden;
 }
 
-#tabla_usuarios{
+#tabla_usuarios, #tabla_usuarios_header{
     border-collapse:separate;
     border-spacing:0 5px;   
+    table-layout: fixed;
+    width: 100%;
+    margin-left: 16px;
 }
+
 
 #tabla_usuarios td{
     padding: 5px 5px;
-    width: 23vw;
+    overflow: hidden;
+    width: 25%;
 }
+
+.td-tipo{
+    width: 21%;
+    text-align: center !important;
+}
+
+
 
 #tabla_usuarios tr:nth-child(even) {background: #EFEFEF}
 #tabla_usuarios tr:nth-child(odd) {background: #E5F6EC}
@@ -80,13 +93,56 @@ body{
 
 footer{
     background-color: #6A6A6A;
-    height: 14vh;
-    display: flex;
-    justify-content: end;
-    align-items: center;
+    height: 200px;
+    text-align: center;
 }
 
 #btn_nuevo_usuario{
-    margin-right: 5vw;
+    color: white;
+    margin-top: 10px;
+    border: none;
+    width: 100%;
+    background-color: gray;
+    border-radius: 5px 5px 0 0;
+    padding: 1%;
 }
 
+/*----------Formulario usuario----------*/
+#tabla_form_add{
+    padding: 8px 0;
+    width: 100%;
+    background-color: #E5F6EC;
+    border-radius: 0 0 5px 5px;
+    font-size: 14px;
+}
+
+#tabla_form_add td{
+    width: 20%;
+}
+
+.input_form{
+    width: 90%;
+    border: none;
+    border-bottom: 2px solid black;
+    background-color: transparent;
+}
+
+.input_form:focus{
+    border-bottom: 2px solid green;
+    outline: none;
+    color: green;
+}
+
+#input_nivel{
+    text-align: center;
+}
+
+
+
+
+
+@media (max-width:990px){
+    #tabla_usuarios, #tabla_usuarios_header, #input_busqueda, #search_icon, #tabla_form_add td{
+        font-size: 1.7vw;
+    }
+}

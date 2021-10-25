@@ -1,5 +1,10 @@
 header{
     text-align: center;
+    height: 15vh;
+}
+
+#logo{
+    height: 15vh;
 }
 
 #contenido{

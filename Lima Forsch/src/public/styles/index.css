@@ -5,7 +5,7 @@ body{
 #contenido{
     margin-left: 16px;
     width: 70%;
-    height: 80vh;
+    height: 85vh;
     float: left;
 }
 
@@ -69,18 +69,19 @@ body{
 }
 
 #table-scroll {
-    height:54vh;
+    height:59vh;
     overflow:auto;  
 }
 
 #tabla_archivos{
     border-collapse:separate;
-    border-spacing:0 5px;   
+    border-spacing:0 5px;  
+    table-layout: fixed; 
 }
 
 #tabla_archivos td{
     padding: 5px 5px;
-    width: 23vw;
+    overflow-x: hidden;
 }
 
 #tabla_archivos tr:hover{
@@ -95,9 +96,11 @@ body{
 /*----------Barra lateral--------*/
 
 #lateral{
-    height: 80vh;
+    height: 85vh;
     background-color: #C4C4C4;
     display: flex;
+    padding: 50px;
+    text-align: center;
 }
 
 /*----------Footer----------*/
@@ -115,3 +118,9 @@ footer{
     margin-right: 5vw;
 }
 
+
+@media (max-width:990px){
+    #tabla_archivos, #tabla_archivos_header, #input_busqueda, #search_icon, .radioBusquedaSpan{
+        font-size: 1.7vw;
+    }
+}
