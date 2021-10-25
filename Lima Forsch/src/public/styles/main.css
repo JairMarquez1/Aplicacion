@@ -28,6 +28,7 @@ header{
 
 #logo{
     height: 15vh;
+    /*float: left;*/
 }
 
 #logo:hover{
