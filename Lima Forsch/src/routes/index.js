@@ -15,6 +15,7 @@ router.get('/add-user', (req,res) => {res.render('add-user');});
 
 router.post('/iniciar-sesion', userController.iniciar_sesion);
 
+router.get('/visualizar', (req,res) => {res.render('visualizar');});
 
 
 
