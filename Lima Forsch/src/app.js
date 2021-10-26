@@ -19,7 +19,7 @@ app.use(morgan('dev'));
 app.use(express.urlencoded({extended: false}));
 
 //routes
-app.use(require('./routes/index.js'))
+app.use(require('./routes/index.js'));
 
 
 //static files

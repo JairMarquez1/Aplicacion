@@ -37,7 +37,7 @@
 <footer>
     <div style="width:80vw; margin:auto">
     <button id="btn_nuevo_usuario" onclick="dropMenu(`tabla_form_add`)">Agregar nuevo usuario</button>
-    <form action="add-user" method="POST" >
+    <form name="registerForm" action="add-user" method="POST" onsubmit="return validateRegisterForm()">
             <table id="tabla_form_add" style="visibility:hidden;">
                 <tr>
                     <td>Nombre</td>
@@ -47,10 +47,10 @@
                     <td></td>
                 </tr>
                 <tr>
-                    <td><input class="input_form" type="text"></td>
-                    <td><input id="input_contrasena" class="input_form" type="password"></td>
-                    <td><input class="input_form" type="email"></td>
-                    <td><input id="input_nivel" class="input_form" type="number" min="1" max="3" value="1"></td>
+                    <td><input id="input_nombre" name="nombre_registro" class="input_form" type="text" onclick="color(this)" required></td>
+                    <td><input id="input_contrasena" name="contrasena_registro" class="input_form" type="password" onclick="color(this)" required></td>
+                    <td><input id="input_email" name="email_registro "class="input_form" type="email" onclick="color(this)" required></td>
+                    <td><input id="input_nivel" name="nivel_registro" class="input_form" type="number" min="1" max="3" value="1" onclick="color(this)" required></td>
                     <td><input type="submit" class="btn2"></td>
                 </tr>
             </table>

@@ -99,8 +99,8 @@ body{
     height: 85vh;
     background-color: #C4C4C4;
     display: flex;
-    padding: 50px;
     text-align: center;
+    align-items: center;
 }
 
 /*----------Footer----------*/
@@ -108,7 +108,6 @@ body{
 footer{
     background-color: #6A6A6A;
     height: 14vh;
-    min-height: 50px;
     display: flex;
     justify-content: end;
     align-items: center;
@@ -118,9 +117,18 @@ footer{
     margin-right: 5vw;
 }
 
+#file-icon{
+    font-size: 10vw;
+}
+
 
 @media (max-width:990px){
-    #tabla_archivos, #tabla_archivos_header, #input_busqueda, #search_icon, .radioBusquedaSpan{
+    #tabla_archivos, #tabla_archivos_header, #input_busqueda, #search_icon, .radioBusquedaSpan, #lateral{
         font-size: 1.7vw;
     }
+
+    #lateral{
+        align-items: start;
+    }
+
 }

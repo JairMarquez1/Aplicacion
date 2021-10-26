@@ -10,30 +10,29 @@ body{
     background-size: cover;
 }
 
-/*body:before {
-    content: "";
-    width: 100%;
-    min-height: 1080px;
-    position: absolute;
-    background-image: linear-gradient(to right, #57638f,#98bd9c);
-    opacity:50%;
-    z-index: -1; 
-}*/
 
 header{
     background-color: #D5FAE8; /*#577064*/
     padding: 12px;
     height: 10vh;
+    /*float: left;*/
 }
 
 #logo{
     height: 10vh;
-    /*float: left;*/
 }
 
 #logo:hover{
     cursor:pointer;
 }
+
+/*nav{
+    background-color: #D5FAE8;
+    text-align: end;
+    height: 10vh;
+    padding: 12px;
+    font-size: 50px;
+}*/
 
 
 
@@ -70,4 +69,11 @@ li{
     font-size: 16px;
     padding: 4px 5px;
     margin-top: 4px;
+}
+
+@media (max-width:990px){
+    .btn1{
+        padding: 1vw;
+        font-size: 2.5vw;
+    }
 }

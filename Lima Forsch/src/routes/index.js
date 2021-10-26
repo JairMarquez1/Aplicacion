@@ -17,6 +17,8 @@ router.post('/iniciar-sesion', userController.iniciar_sesion);
 
 router.get('/visualizar', (req,res) => {res.render('visualizar');});
 
+router.get('/file-stats', (req,res) => {res.render('file-stats');});
+
 
 
 module.exports = router;

@@ -11,7 +11,6 @@ async function iniciar_sesion(req,res){
 }
 
 async function listar_usuarios(req,res){
-    request = JSON.parse(JSON.stringify(req.body));
     datos = await usuario.getUsers(20);
     res.render('usercrud', {usuarios: datos});
 }

@@ -1,0 +1,36 @@
+body{
+    background: #6A6A6A;
+}
+
+
+#contenido{
+    width: 100%;
+    text-align: center;
+    background: white;
+}
+
+#grafica{
+    max-width: 700px;
+    width: 50vw;
+    background: white;
+    margin: 30px;
+    margin: auto;
+}
+
+footer{
+    margin-top: 16px;
+    background-color: #6A6A6A;
+    text-align: center;
+    color: white;
+}
+
+b{
+    color: rgb(0, 255, 0);
+}
+
+@media (max-width:990px){
+    #grafica{
+        width: 65vw;
+        margin: auto;
+    }
+}
