@@ -1,0 +1,93 @@
+
+.div_contenedor{
+    background: white;
+    height: 100vh;  
+    /*display: flex;     */
+    align-items:center;
+    justify-content: center;
+    
+}
+
+.columna1{
+    float: left;
+    height: 90%;
+    display: flex;     
+    align-items: center;
+    justify-content: center;
+    padding-left: 60px;
+}
+.columna2{
+    float: center;
+    height: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding-top: 20px;
+}
+
+.drop-area{
+    background: white;
+    border: 5px dashed rgb(50, 189, 37);
+    border-radius: 10px;
+    width: 900px;       
+    height: 300px;
+    margin: 0px auto;
+}
+
+.drop-area.active{
+    background-color: rgb(162, 235, 162);
+    color: black;
+    border: 2px dashed rgb(5, 90, 5);
+}
+
+.drop-area span{
+    font-size: 25px;
+    color: #000;
+}
+
+.drop-area button{
+    padding: 10px 25px;
+    font-size: 20px;
+    border: 0;
+    outline: none;
+    background-color: #D5FAE8;
+    color: black;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.file-container{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border: solid 1px #ddd; 
+}
+
+#preview{
+    margin-top: 10px;
+
+}
+
+#div-btn2{
+    width: 100px;       
+    height: 100px;
+    margin: 0px auto;
+    
+}
+
+#div-btn2 button{
+
+    border-style:solid;
+    padding: 10px;
+    font-size: 15px;
+    outline: none;
+    background-color: rgb(50, 189, 37);
+    color: white;
+    border-color: rgb(0, 0, 0);
+    cursor: pointer;
+    width: 150px;
+}
+

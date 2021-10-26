@@ -20,5 +20,6 @@ router.get('/visualizar', (req,res) => {res.render('visualizar');});
 router.get('/file-stats', (req,res) => {res.render('file-stats');});
 
 
+router.get('/subir_archivo', (req,res) => {res.render('subirArchivo');});
 
 module.exports = router;
