@@ -2,7 +2,6 @@
 .div_contenedor{
     background: white;
     height: 100vh;  
-    /*display: flex;     */
     align-items:center;
     justify-content: center;
     
@@ -14,10 +13,9 @@
     display: flex;     
     align-items: center;
     justify-content: center;
-    padding-left: 60px;
+    padding-left: 6vw;
 }
 .columna2{
-    float: center;
     height: 90%;
     display: flex;
     align-items: center;
@@ -30,7 +28,7 @@
     background: white;
     border: 5px dashed rgb(50, 189, 37);
     border-radius: 10px;
-    width: 900px;       
+    width: 85%;       
     height: 300px;
     margin: 0px auto;
 }
@@ -72,22 +70,36 @@
 }
 
 #div-btn2{
-    width: 100px;       
-    height: 100px;
-    margin: 0px auto;
+    width: 100%;       
+    text-align: center;
     
 }
 
 #div-btn2 button{
 
-    border-style:solid;
+    border: 2px black solid;
     padding: 10px;
     font-size: 15px;
     outline: none;
     background-color: rgb(50, 189, 37);
     color: white;
-    border-color: rgb(0, 0, 0);
     cursor: pointer;
     width: 150px;
 }
 
+@media (max-width:990px){
+    h1, h2, #btn1, .drop-area span{
+        font-size: 2.5vw;
+        padding: 3px;
+    }
+    #nube{
+        width: 25vw;
+    }
+    .drop-area{
+        height: 30vw;
+        border: 3px dashed rgb(50, 189, 37);
+    }
+    .columna2{
+        padding-top: 1vw;
+    }
+}

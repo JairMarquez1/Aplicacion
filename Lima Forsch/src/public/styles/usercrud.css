@@ -79,6 +79,14 @@ body{
     width: 25%;
 }
 
+.tr-usuario-off{
+    color: rgb(158, 158, 158);
+}
+
+.tr-usuario-off td{
+    background-color: #EFEFEF;
+}
+
 .td-tipo{
     width: 21%;
     text-align: center !important;
@@ -86,14 +94,14 @@ body{
 
 
 
-#tabla_usuarios tr:nth-child(even) {background: #EFEFEF}
+#tabla_usuarios tr:nth-child(even) {background: #E5F6EC/*#EFEFEF*/}
 #tabla_usuarios tr:nth-child(odd) {background: #E5F6EC}
 
 /*----------Footer----------*/
 
 footer{
     background-color: #6A6A6A;
-    height: 200px;
+    height: 300px;
     text-align: center;
 }
 
@@ -144,5 +152,11 @@ footer{
 @media (max-width:990px){
     #tabla_usuarios, #tabla_usuarios_header, #input_busqueda, #search_icon, #tabla_form_add td{
         font-size: 1.7vw;
+    }
+    #tabla_usuarios_header th{
+        padding: 2px 5px;
+    }
+    #tabla_usuarios_header{
+        height: 20px;
     }
 }

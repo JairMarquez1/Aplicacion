@@ -39,3 +39,7 @@ span{
 #usuario, #contrasena, #btn_iniciar{
     width: 60%;
 }
+
+#logout{
+    display: none;
+}

@@ -71,6 +71,11 @@ li{
     margin-top: 4px;
 }
 
+#logout{
+    cursor: pointer;
+    
+}
+
 @media (max-width:990px){
     .btn1{
         padding: 1vw;

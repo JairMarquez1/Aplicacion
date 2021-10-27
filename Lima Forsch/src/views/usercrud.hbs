@@ -15,7 +15,7 @@
     <tr>
       <th class="td-user">Usuario</th>
       <th class="td-correo">Correo</th>
-      <th class="td-tipo">Tipo</th>
+      <th class="td-tipo">Nivel</th>
       <th class="td-acc">Acciones</th>
   </tr>
 </table>
@@ -23,11 +23,13 @@
 <div id="table-scroll">
 <table id="tabla_usuarios" width="100%">
     {{#each usuarios}}
-    <tr>
+    <tr {{#if estado}}class="tr-usuario-on"{{else}}class="tr-usuario-off"{{/if}}>
         <td>{{usuario}}</td>
-        <td>correo@correo.com</td>
+        <td>{{correo}}</td>
         <td class="td-tipo">{{nivel}}</td>
-        <td class="td-acc"><span>Modificar</span> &nbsp <span>Inhabilitar</span></td>
+        <td class="td-acc">
+            <span>Modificar</span> &nbsp <span>{{#if estado}}Inhabilitar{{else}}Habilitar{{/if}}</span>
+        </td>
     </tr>
     {{/each}}
 
@@ -37,7 +39,7 @@
 <footer>
     <div style="width:80vw; margin:auto">
     <button id="btn_nuevo_usuario" onclick="dropMenu(`tabla_form_add`)">Agregar nuevo usuario</button>
-    <form name="registerForm" action="add-user" method="POST" onsubmit="return validateRegisterForm()">
+    <form name="registerForm" action="/add-user" method="POST" onsubmit="return validateRegisterForm()">
             <table id="tabla_form_add" style="visibility:hidden;">
                 <tr>
                     <td>Nombre</td>
@@ -49,7 +51,7 @@
                 <tr>
                     <td><input id="input_nombre" name="nombre_registro" class="input_form" type="text" onclick="color(this)" required></td>
                     <td><input id="input_contrasena" name="contrasena_registro" class="input_form" type="password" onclick="color(this)" required></td>
-                    <td><input id="input_email" name="email_registro "class="input_form" type="email" onclick="color(this)" required></td>
+                    <td><input id="input_email" name="email_registro" class="input_form" type="email" onclick="color(this)" required></td>
                     <td><input id="input_nivel" name="nivel_registro" class="input_form" type="number" min="1" max="3" value="1" onclick="color(this)" required></td>
                     <td><input type="submit" class="btn2"></td>
                 </tr>

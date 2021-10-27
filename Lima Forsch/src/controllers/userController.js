@@ -2,8 +2,8 @@ const UserModel = require('../models/UserModel');
 usuario = new UserModel();
 
 async function iniciar_sesion(req,res){
-    request = JSON.parse(JSON.stringify(req.body));
-    datos = await usuario.findByName(request.usuario);
+    obj = JSON.parse(JSON.stringify(req.body));
+    datos = await usuario.findByName(obj.usuario);
     if(datos)
         res.send(datos);
     else
@@ -16,15 +16,18 @@ async function listar_usuarios(req,res){
 }
 
 async function crear_usuario(req,res){
-    request = JSON.parse(JSON.stringify(req.body));
-    const nuevoUsuario = {
-        usuario: obj.usuario,
-        pass: obj.contrasena,
-        nivel: 1,
+    console.log(req.body);
+    obj = JSON.parse(JSON.stringify(req.body));
+    nuevoUsuario = {
+        usuario: obj.nombre_registro,
+        pass: obj.contrasena_registro,
+        correo: obj.email_registro,
+        nivel: obj.nivel_registro,
         estado: 1
     };
-    await usuarios.agregar(nuevoUsuario);
-    res.send(nuevoUsuario);
+    console.log(obj);
+    await usuario.agregar(nuevoUsuario);
+    res.redirect('back');
 }
 
 
