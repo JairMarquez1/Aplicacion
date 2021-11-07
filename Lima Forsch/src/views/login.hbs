@@ -24,7 +24,9 @@
                         <button class="btn2" onclick="window.location='/registro';">Registrarse</button>
                     </li>
                     <li>
-                        {{error}}
+                        {{#if errorMsg}}
+                            <div id="error">{{errorMsg}}</div>
+                        {{/if}}
                     </li>
                 </ul>
             </form>

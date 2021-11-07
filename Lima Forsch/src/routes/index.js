@@ -19,11 +19,13 @@ router.get('/usercrud', userController.cargar_crud);
 
 router.post('/usercrud', userController.cargar_crud);
 
-router.get('/add-user', (req,res) => {res.render('add-user');});
-
 router.post('/add-user', userController.crear_usuario);
 
 router.post('/modify-user', userController.modificar_usuario);
+
+router.post('/search-user', userController.buscar_usuario);
+
+router.get('/registro', userController.cargar_registro);
 
 //Archivos------------------------
 
@@ -33,7 +35,6 @@ router.get('/file-stats', (req,res) => {res.render('file-stats');});
 
 router.get('/subir-archivo', (req,res) => {res.render('subirArchivo');});
 
-router.get('/registro', (req,res) => {res.render('registroUsuario');});
 
 
 module.exports = router;

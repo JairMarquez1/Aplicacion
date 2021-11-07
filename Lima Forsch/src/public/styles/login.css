@@ -43,3 +43,8 @@ span{
 #logout{
     display: none;
 }
+
+#error{
+    font-size: 18px;
+    color: red;
+}

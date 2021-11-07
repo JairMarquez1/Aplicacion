@@ -48,6 +48,22 @@ span{
     margin-top: 4px;
 }
 
+#input_nivel{
+    text-align: center;
+}
+
 #logout{
     display: none;
+}
+
+#error{
+    font-size: 18px;
+    color: red;
+}
+
+
+@media (max-width:990px){
+    #registro{
+        width: 90vw;
+    }
 }

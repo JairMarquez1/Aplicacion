@@ -58,7 +58,6 @@ function validateRegisterForm() {
   }
 }
 
-
 function color(element){
   element.style.backgroundColor = "";
 }

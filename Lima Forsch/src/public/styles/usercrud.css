@@ -8,6 +8,11 @@ body{
     float: left;
 }
 
+button{
+    border: none;
+    background: transparent;
+}
+
 /*-----------Barra busqueda----------*/
 
 #input_busqueda{
@@ -69,7 +74,7 @@ body{
     border-spacing:0 0px;   
     table-layout: fixed;
     width: 100%;
-    margin-left: 16px;
+    padding: 0 0 0 16px;
 }
 
 
@@ -104,6 +109,21 @@ body{
 
 .mod-btn:hover{
     background: #218838;
+    transition: all 0.3s ease-out;
+}
+
+.hab-btn{
+    width: 80px;
+    color: white;
+    cursor: pointer;
+    border: none;
+    border-radius: 3px;
+    background: #9b9b9b;
+    padding: 4px 5px;
+}
+
+.hab-btn:hover{
+    background: #616161;
     transition: all 0.3s ease-out;
 }
 
@@ -192,7 +212,7 @@ footer{
 
 
 @media (max-width:990px){
-    #tabla_usuarios, #tabla_usuarios_header, #input_busqueda, #search_icon, #tabla_form_add td, .mod-btn, .btn2, input{
+    #tabla_usuarios, #tabla_usuarios_header, #input_busqueda, #search_icon, #tabla_form_add td, .mod-btn,.hab-btn, .btn2, input{
         font-size: 1.7vw;
     }
     #tabla_usuarios_header th{
@@ -200,11 +220,18 @@ footer{
     }
     #tabla_usuarios_header{
         height: 20px;
+        padding: 0 0 0 1px;
     }
-    .btn2, .mod-btn{
+    .btn2, .mod-btn, .hab-btn{
         padding: 2px 5px;
     }
     #modifyUser h3{
         font-size: 2vw;
+    }
+    .hab-btn{
+        width: 5em;
+    }
+    #tabla_usuarios{
+        padding: 0 0 0 1px;
     }
 }

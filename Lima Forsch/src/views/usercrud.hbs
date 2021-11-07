@@ -3,14 +3,16 @@
 
 
 <div id="contenido">
-
+    
+<!--Menú para buscar usuarios-->
 <table id="tabla_buscar_usuarios" width="50%">
-    <form>
-        <td> <input id="input_busqueda" type="text" placeholder="Buscar usuario"> </td>
-        <td> <ion-icon id="search_icon" name="search"></ion-icon></ion-icon> </td>
+    <form action="/search-user" method="POST">
+        <td> <input id="input_busqueda" type="text" placeholder="Buscar usuario" name="string_search" autocomplete="on"> </td>
+        <td> <button type="submit"><ion-icon id="search_icon" name="search"></ion-icon></ion-icon> </button></td>
     </form>
 </table>
 
+<!--Cabecera de la tabla usuarios-->
 <table id="tabla_usuarios_header">
     <tr>
       <th class="td-user">Usuario</th>
@@ -23,6 +25,7 @@
 <!--Se enlistan los usuarios en una tabla con scroll-->
 <div id="table-scroll">
 <table id="tabla_usuarios" width="100%">
+    {{#if usuarios}}{{else}}<tr><td>No se encontraron coincidencias</td></tr>{{/if}}
     {{#each usuarios}}
     <tr {{#if estado}}class="tr-usuario-on"{{else}}class="tr-usuario-off"{{/if}}>
         <td>{{usuario}}</td>
@@ -31,7 +34,7 @@
         <td class="td-acc">
             <form method="POST">
                 <button class="mod-btn" type="submit" name="modifyUser" value="{{usuario}}">Modificar</button> &nbsp 
-                <span>{{#if estado}}Inhabilitar{{else}}Habilitar{{/if}}</span>
+                <button class="hab-btn" type="submit" name="enableUser" value="{{usuario}}">{{#if estado}}Inhabilitar{{else}}Habilitar{{/if}}</button>
             </form>
         </td>
     </tr>
@@ -61,10 +64,10 @@
                         <td></td>
                     </tr>
                     <tr>
-                        <td><input id="input_nombre_modify" name="nombre_modify" class="input_form" type="text" onclick="color(this)" required value="{{modifyUser.usuario}}"></td>
+                        <td><label>{{modifyUser.usuario}}</label></td>
                         <td><input type="hidden" name="pass_modify" value="0"> <label class="chbx" onclick="checkBox(this,'pass_modify','Se generará una contraseña y se enviará al correo asignado al usuario')">Restablecer</label>
                         <td><input id="input_email_modify" name="email_modify" class="input_form" type="email" onclick="color(this)" required value="{{modifyUser.correo}}"></td>
-                        <td><input id="input_nivel_modify" name="nivel_modify" class="input_form" type="number" min="1" max="3" value="1" onclick="color(this)" required value="{{modifyUser.nivel}}"></td>
+                        <td><input id="input_nivel_modify" name="nivel_modify" class="input_form" type="number" min="1" max="3" onclick="color(this)" required value="{{modifyUser.nivel}}"></td>
                         <td><input type="submit" class="btn2" value="Guardar"></td>
                     </tr>
                 </table>
@@ -85,9 +88,9 @@
                         <td></td>
                     </tr>
                     <tr>
-                        <td><input id="input_nombre" name="nombre_registro" class="input_form" type="text" onclick="color(this)" required></td>
-                        <td><input id="input_contrasena" name="contrasena_registro" class="input_form" type="password" onclick="color(this)" required></td>
-                        <td><input id="input_email" name="email_registro" class="input_form" type="email" onclick="color(this)" required></td>
+                        <td><input id="input_nombre" name="nombre_registro" class="input_form" type="text" onclick="color(this)" required autocomplete="on"></td>
+                        <td><input id="input_contrasena" name="contrasena_registro" class="input_form" type="password" onclick="color(this)" required autocomplete="on"></td>
+                        <td><input id="input_email" name="email_registro" class="input_form" type="email" onclick="color(this)" required autocomplete="on"></td>
                         <td><input id="input_nivel" name="nivel_registro" class="input_form" type="number" min="1" max="3" value="1" onclick="color(this)" required></td>
                         <td><input type="submit" class="btn2" value="Agregar"></td>
                     </tr>
