@@ -1,13 +1,23 @@
 const UserModel = require('../models/UserModel');
+const bcrypt = require('bcrypt');
 user = new UserModel();
 error = false;
 
 async function iniciar_sesion(req,res){
     console.log(req.body);
     obj = JSON.parse(JSON.stringify(req.body));
+
+
     datos = await user.findByName(obj.usuario);
-    if(datos)
-        res.send(datos);
+    if(datos){
+        //Compara la contraseña con el hash almacenado
+        if (bcrypt.compareSync(obj.contrasena, datos.pass)){
+            //iniciar sesión
+            res.render('index');
+        }
+        else
+            res.render('login', {error:'La contraseña es incorrecta'});
+    }
     else
         res.render('login', {error:'Los datos no son correctos'});
 }
@@ -34,6 +44,7 @@ async function cargar_crud(req,res){
 
 async function crear_usuario(req,res){
     obj = JSON.parse(JSON.stringify(req.body));
+
     const {nombre_registro, contrasena_registro, email_registro, nivel_registro} = obj;
     nuevoUsuario = {
         usuario: nombre_registro,
@@ -42,7 +53,10 @@ async function crear_usuario(req,res){
         nivel: nivel_registro,
         estado: 1
     };
+
     if(validarUsuario(nuevoUsuario)){
+        let hashPass =  await bcrypt.hash(contrasena_registro, 8);
+        nuevoUsuario.pass = hashPass;
         await user.addUser(nuevoUsuario);
         error = false;
     }
@@ -72,11 +86,14 @@ async function modificar_usuario(req,res){
 
 
 
-function validarUsuario(datosUsuario){
+async function validarUsuario(datosUsuario){
     const {usuario, pass, correo, nivel, estado} = datosUsuario;
     console.log('us',usuario.length);
-    if((usuario.length >= 3) && (pass.length >= 8) && (validateEmail(correo)) && (nivel > 0) && (nivel <= 3) && (estado == 1))
-        return true;
+    if((usuario.length >= 3) && (pass.length >= 4) && (validateEmail(correo)) && (nivel > 0) && (nivel <= 3) && (estado == 1)){
+        datos = await user.findByName(usuario);
+        if(!datos)
+            return true;
+    }
     else
         return false;
 }
