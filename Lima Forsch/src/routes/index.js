@@ -33,5 +33,7 @@ router.get('/file-stats', (req,res) => {res.render('file-stats');});
 
 router.get('/subir-archivo', (req,res) => {res.render('subirArchivo');});
 
+router.get('/registro', (req,res) => {res.render('registroUsuario');});
+
 
 module.exports = router;
