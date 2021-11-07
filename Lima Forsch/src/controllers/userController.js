@@ -3,6 +3,7 @@ user = new UserModel();
 error = false;
 
 async function iniciar_sesion(req,res){
+    console.log(req.body);
     obj = JSON.parse(JSON.stringify(req.body));
     datos = await user.findByName(obj.usuario);
     if(datos)

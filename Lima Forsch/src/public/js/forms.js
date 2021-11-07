@@ -23,7 +23,6 @@ function showPass(id){
 
 function checkBox(e,name,msg){
   x = document.getElementsByName(name)[0];
-  console.log('value', x.value);
   if (x.value == '0'){
     if (confirm(msg)){
       x.value = '1';
