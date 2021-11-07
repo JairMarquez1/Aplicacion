@@ -20,6 +20,7 @@
   </tr>
 </table>
 
+<!--Se enlistan los usuarios en una tabla con scroll-->
 <div id="table-scroll">
 <table id="tabla_usuarios" width="100%">
     {{#each usuarios}}
@@ -28,7 +29,10 @@
         <td>{{correo}}</td>
         <td class="td-tipo">{{nivel}}</td>
         <td class="td-acc">
-            <span>Modificar</span> &nbsp <span>{{#if estado}}Inhabilitar{{else}}Habilitar{{/if}}</span>
+            <form method="POST">
+                <button class="mod-btn" type="submit" name="modifyUser" value="{{usuario}}">Modificar</button> &nbsp 
+                <span>{{#if estado}}Inhabilitar{{else}}Habilitar{{/if}}</span>
+            </form>
         </td>
     </tr>
     {{/each}}
@@ -38,25 +42,61 @@
 
 <footer>
     <div style="width:80vw; margin:auto">
-    <button id="btn_nuevo_usuario" onclick="dropMenu(`tabla_form_add`)">Agregar nuevo usuario</button>
-    <form name="registerForm" action="/add-user" method="POST" onsubmit="return validateRegisterForm()">
-            <table id="tabla_form_add" style="visibility:hidden;">
-                <tr>
-                    <td>Nombre</td>
-                    <td>Contraseña <ion-icon name="eye-off-outline" id="showIcon" onclick="showPass(`showIcon`)"></ion-icon></td>
-                    <td>Correo</td>
-                    <td>Nivel</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td><input id="input_nombre" name="nombre_registro" class="input_form" type="text" onclick="color(this)" required></td>
-                    <td><input id="input_contrasena" name="contrasena_registro" class="input_form" type="password" onclick="color(this)" required></td>
-                    <td><input id="input_email" name="email_registro" class="input_form" type="email" onclick="color(this)" required></td>
-                    <td><input id="input_nivel" name="nivel_registro" class="input_form" type="number" min="1" max="3" value="1" onclick="color(this)" required></td>
-                    <td><input type="submit" class="btn2"></td>
-                </tr>
-            </table>
-    </form>
+        <!--_________________Mensaje de error______________-->
+        {{#if errorMsg}}
+            <div id="error">{{errorMsg}}</div>
+        {{/if}}
+
+        <!--_________________Modificar usuario______________-->
+        {{#if modifyUser}}
+        <div id="modifyUser">
+            <h3>Modificar usuario: {{modifyUser.usuario}}</h3>
+            <form name="modifyForm" action="/modify-user" method="POST" onsubmit="">
+                <table id="tabla_form_add" style="visibility: ;">
+                    <tr>
+                        <td>Nombre</td>
+                        <td>Contraseña</td>
+                        <td>Correo</td>
+                        <td>Nivel</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><input id="input_nombre_modify" name="nombre_modify" class="input_form" type="text" onclick="color(this)" required value="{{modifyUser.usuario}}"></td>
+                        <td><input type="hidden" name="pass_modify" value="0"> <label class="chbx" onclick="checkBox(this,'pass_modify','Se generará una contraseña y se enviará al correo asignado al usuario')">Restablecer</label>
+                        <td><input id="input_email_modify" name="email_modify" class="input_form" type="email" onclick="color(this)" required value="{{modifyUser.correo}}"></td>
+                        <td><input id="input_nivel_modify" name="nivel_modify" class="input_form" type="number" min="1" max="3" value="1" onclick="color(this)" required value="{{modifyUser.nivel}}"></td>
+                        <td><input type="submit" class="btn2" value="Guardar"></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        {{/if}}   
+
+        <!--_________________Agregar usuario______________-->
+        <button id="btn_nuevo_usuario" onclick="dropMenu(`agregarUsuario`)">Agregar nuevo usuario</button>
+        <div id="agregarUsuario" style="display:none;">
+            <form name="registerForm" action="/add-user" method="POST" onsubmit="return validateRegisterForm()">
+                <table id="tabla_form_add">
+                    <tr>
+                        <td>Nombre</td>
+                        <td>Contraseña <ion-icon name="eye-off-outline" id="showIcon" onclick="showPass(`showIcon`)"></ion-icon></td>
+                        <td>Correo</td>
+                        <td>Nivel</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><input id="input_nombre" name="nombre_registro" class="input_form" type="text" onclick="color(this)" required></td>
+                        <td><input id="input_contrasena" name="contrasena_registro" class="input_form" type="password" onclick="color(this)" required></td>
+                        <td><input id="input_email" name="email_registro" class="input_form" type="email" onclick="color(this)" required></td>
+                        <td><input id="input_nivel" name="nivel_registro" class="input_form" type="number" min="1" max="3" value="1" onclick="color(this)" required></td>
+                        <td><input type="submit" class="btn2" value="Agregar"></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+
+        
+
     </div>
 
 </footer>

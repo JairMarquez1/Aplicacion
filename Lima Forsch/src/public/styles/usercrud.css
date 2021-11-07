@@ -66,7 +66,7 @@ body{
 
 #tabla_usuarios, #tabla_usuarios_header{
     border-collapse:separate;
-    border-spacing:0 5px;   
+    border-spacing:0 0px;   
     table-layout: fixed;
     width: 100%;
     margin-left: 16px;
@@ -77,6 +77,7 @@ body{
     padding: 5px 5px;
     overflow: hidden;
     width: 25%;
+    border-bottom: 1px solid rgb(173, 173, 173);
 }
 
 .tr-usuario-off{
@@ -92,6 +93,20 @@ body{
     text-align: center !important;
 }
 
+.mod-btn{
+    color: white;
+    cursor: pointer;
+    border: none;
+    border-radius: 3px;
+    background: #28a745;
+    padding: 4px 5px;
+}
+
+.mod-btn:hover{
+    background: #218838;
+    transition: all 0.3s ease-out;
+}
+
 
 
 #tabla_usuarios tr:nth-child(even) {background: #E5F6EC/*#EFEFEF*/}
@@ -103,6 +118,7 @@ footer{
     background-color: #6A6A6A;
     height: 300px;
     text-align: center;
+    padding-top: 20px;
 }
 
 #btn_nuevo_usuario{
@@ -115,7 +131,12 @@ footer{
     padding: 1%;
 }
 
-/*----------Formulario usuario----------*/
+#error{
+    font-size: 14px;
+    background-color: salmon;
+}
+
+/*----------Formulario agregar usuario----------*/
 #tabla_form_add{
     padding: 8px 0;
     width: 100%;
@@ -141,16 +162,37 @@ footer{
     color: green;
 }
 
-#input_nivel{
+#input_nivel, #input_nivel_modify{
     text-align: center;
+}
+
+
+/*----------Formulario modificar usuario----------*/
+#modifyUser{
+    border-radius: 5px;
+    background-color: #E5F6EC;  
+    background: #28a745;
+}
+
+#modifyUser h3{
+    font-size: 14px;
+    border-bottom: 1px solid black;
+    padding: 1% 0px;
+}
+
+.chbx{
+    cursor: pointer;
+    border: 1px solid black;
+    border-radius: 3px;
+    background: #e4e4e473;
+    padding: 1px 5px;
 }
 
 
 
 
-
 @media (max-width:990px){
-    #tabla_usuarios, #tabla_usuarios_header, #input_busqueda, #search_icon, #tabla_form_add td{
+    #tabla_usuarios, #tabla_usuarios_header, #input_busqueda, #search_icon, #tabla_form_add td, .mod-btn, .btn2, input{
         font-size: 1.7vw;
     }
     #tabla_usuarios_header th{
@@ -158,5 +200,11 @@ footer{
     }
     #tabla_usuarios_header{
         height: 20px;
+    }
+    .btn2, .mod-btn{
+        padding: 2px 5px;
+    }
+    #modifyUser h3{
+        font-size: 2vw;
     }
 }

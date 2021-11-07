@@ -1,10 +1,10 @@
 function dropMenu(id){
 	elemento = document.getElementById(id);
-	if (elemento.style.visibility == "hidden"){
-		elemento.style.visibility = "visible";
+	if (elemento.style.display == "none"){
+		elemento.style.display = "";
 	}
 	else{
-        elemento.style.visibility = "hidden";
+        elemento.style.display = "none";
     }
 }
 
@@ -19,6 +19,21 @@ function showPass(id){
         elemento.name = "eye-off-outline";
      }
 
+}
+
+function checkBox(e,name,msg){
+  x = document.getElementsByName(name)[0];
+  console.log('value', x.value);
+  if (x.value == '0'){
+    if (confirm(msg)){
+      x.value = '1';
+      e.style.backgroundColor = 'rgb(235 223 0)';
+    }
+  }
+  else{
+    x.value = '0';
+    e.style.backgroundColor = '#e4e4e473';
+  }
 }
 
 
