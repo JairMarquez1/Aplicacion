@@ -16,7 +16,10 @@
 <body>
     <header>
         <img id="logo" src="images/logo_lima.png" onclick="window.location='/';"></img>
-        <span id="logout" onclick="window.location='/login';">Cerrar sesión</span>
+        <form action="/logout" method="POST"> 
+            <button type="submit" id="logout" onclick="window.location='/login';">Cerrar sesión</button>
+        </form>
+        
     </header>
     <!--<nav><ion-icon name="log-out-outline" onclick="window.location='/login';"></ion-icon></nav>-->
     {{{body}}}

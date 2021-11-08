@@ -3,8 +3,10 @@ const morgan = require('morgan');
 const exphbs = require('express-handlebars');
 const path = require('path');
 const bcrypt = require('bcrypt');
+const session = require('express-session');
 
 const app = express();
+
 
 //settings
 app.set('port', process.env.PORT || 3000);
@@ -18,6 +20,11 @@ app.set('view engine', '.hbs');
 //midlewares
 app.use(morgan('dev'));
 app.use(express.urlencoded({extended: false}));
+app.use(session({
+    secret: 'asd',
+    resave: false,
+    saveUninitialized: true
+}))
 
 //routes
 app.use(require('./routes/index.js'));

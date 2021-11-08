@@ -18,6 +18,10 @@ module.exports = class FileModel{
         return docs;
     }
 
+    async findByLevel(level,n){
+        const fileRef = db.collection('archivos');
+    }
+
     async agregar(nuevoArchivo){
         db.collection('archivos').add(nuevoArchivo);
     }

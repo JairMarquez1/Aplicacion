@@ -1,5 +1,6 @@
 const UserModel = require('../models/UserModel');
 const bcrypt = require('bcrypt');
+
 user = new UserModel();
 error = false;
 variables = {};
@@ -16,12 +17,17 @@ async function iniciar_sesion(req, res) {
         //Compara la contraseña con el hash almacenado
         if (bcrypt.compareSync(contrasena, datos.pass)) {
             if(datos.estado == 1){
-                /*iniciar sesión
-                .
-                .
-                .
-                */
-                res.render('index');
+                if(datos.usuario != 'Admin'){
+                    req.session.usuario = datos.usuario;
+                    req.session.rol = datos.nivel;
+                    res.redirect('/index');
+                }
+                else{
+                    req.session.usuario = datos.usuario;
+                    req.session.rol = 'admin';
+                    res.redirect('/usercrud');
+                }
+
             }
             else
                 res.render('login', { errorMsg: 'La cuenta fue inhabilitada' });
@@ -34,40 +40,48 @@ async function iniciar_sesion(req, res) {
     datos = null;
 }
 
+function cerrar_sesion (req, res) {
+    req.session.destroy(); 
+    res.redirect('login');
+}
+
 async function cargar_crud(req, res) {
-    variables = JSON.parse(JSON.stringify(req.body));
-    console.log('Variables:', variables);
+    if (req.session.rol == 'admin'){
+        variables = JSON.parse(JSON.stringify(req.body));
+        console.log('Variables:', variables);
 
-    //Si se envió por POST un usuario para modificar, consulta sus datos y los envía para el formulario de modificación
-    if (variables.modifyUser)
-        result_modify = await user.findByName(variables.modifyUser);
+        //Si se envió por POST un usuario para modificar, consulta sus datos y los envía para el formulario de modificación
+        if (variables.modifyUser)
+            result_modify = await user.findByName(variables.modifyUser);
+        else
+            result_modify = false;
+        //Si se envió por POST un usuario para habilitar/deshabilitar, se ejecuta la respectiva acción
+        if (variables.enableUser){
+            await user.changeUserStatus(variables.enableUser);
+            variables.enableUser = null;
+        }
+
+        //Por defecto obtienen los datos de los últimos 20 usuarios para listarse en la tabla
+        if(datos == null){
+            datos = await user.getUsers(20);
+        }
+
+        //Se renderiza la plantilla con los datos obtenidos
+        res.render('usercrud', {
+            usuarios: datos,
+            modifyUser: result_modify,
+            errorMsg: error
+        });
+        datos = null;
+        error = false;
+    }
     else
-        result_modify = false;
-    //Si se envió por POST un usuario para habilitar/deshabilitar, se ejecuta la respectiva acción
-    if (variables.enableUser){
-        await user.changeUserStatus(variables.enableUser);
-        variables.enableUser = null;
-    }
+        res.redirect('login');
 
-    //Por defecto obtienen los datos de los últimos 20 usuarios para listarse en la tabla
-    if(datos == null){
-        datos = await user.getUsers(20);
-    }
-
-    //Se renderiza la plantilla con los datos obtenidos
-    res.render('usercrud', {
-        usuarios: datos,
-        modifyUser: result_modify,
-        errorMsg: error
-    });
-    datos = null;
-    error = false;
 }
 
 function cargar_registro(req, res){
-    res.render('registroUsuario',{
-        errorMsg: error
-    })
+    res.render('registroUsuario',{errorMsg: error});
 }
 
 async function crear_usuario(req, res) {
@@ -156,13 +170,12 @@ function firstCap(str){
 
 
 
-
 module.exports = {
     iniciar_sesion,
+    cerrar_sesion,
     crear_usuario,
     modificar_usuario,
     buscar_usuario,
     cargar_crud,
     cargar_registro
 };
-
