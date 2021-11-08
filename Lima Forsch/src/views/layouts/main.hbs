@@ -15,10 +15,12 @@
 </head>
 <body>
     <header>
-        <img id="logo" src="images/logo_lima.png" onclick="window.location='/';"></img>
-        <form action="/logout" method="POST"> 
+        <img id="logo" src="images/logo_lima.png" onclick="window.location='/';"></img>      
+        <div id="aux">
+        <form style="align-self: self-end;" action="/logout" method="POST"> 
             <button type="submit" id="logout" onclick="window.location='/login';">Cerrar sesión</button>
         </form>
+        </div>
         
     </header>
     <!--<nav><ion-icon name="log-out-outline" onclick="window.location='/login';"></ion-icon></nav>-->

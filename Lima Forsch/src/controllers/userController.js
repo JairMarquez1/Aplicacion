@@ -20,7 +20,7 @@ async function iniciar_sesion(req, res) {
                 if(datos.usuario != 'Admin'){
                     req.session.usuario = datos.usuario;
                     req.session.rol = datos.nivel;
-                    res.redirect('/index');
+                    res.render('index', {usuario: ('Bienvenido ' + datos.usuario).toString()});
                 }
                 else{
                     req.session.usuario = datos.usuario;

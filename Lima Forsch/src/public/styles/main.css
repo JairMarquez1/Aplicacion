@@ -12,6 +12,7 @@ body{
 
 
 header{
+    display: flex;
     background-color: #D5FAE8; /*#577064*/
     padding: 12px;
     height: 10vh;
@@ -73,7 +74,17 @@ li{
 
 #logout{
     cursor: pointer;
+    color: white;
+    background: gray;
+    border-radius: 5px;
+    padding: 5px;
     
+}
+
+#aux{
+    width: 100%;
+    margin-top: 7vh;
+    text-align: end;
 }
 
 @media (max-width:990px){

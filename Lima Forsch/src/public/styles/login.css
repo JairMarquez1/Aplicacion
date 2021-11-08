@@ -1,6 +1,7 @@
 header{
     text-align: center;
     height: 15vh;
+    display: block;
 }
 
 #logo{
