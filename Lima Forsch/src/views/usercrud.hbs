@@ -2,12 +2,82 @@
 <script type="text/javascript" src="js/forms.js"></script>
 
 
+
+<!--<button id="boton" onclick="ajax()">Buscar</button>-->
+
+<script>
+    function buscarAjax(){
+        var input = document.getElementById("input_busqueda");
+        var data =  JSON.stringify({ string_search: input.value })
+
+        const http = new XMLHttpRequest();
+        http.open("POST", "/search-user", true);
+        http.responseType= "document";
+
+        http.onreadystatechange = function (){
+            if (this.readyState == 4 && this.status == 200){
+                //console.log('hola',this.response);
+                var myHtml = this.response;
+                document.getElementById("tabla_usuarios").innerHTML = myHtml.getElementById("tabla_usuarios").outerHTML;
+            }
+        }
+        
+        //console.log(data);
+        http.setRequestHeader('Content-Type', 'application/json');
+        http.send(data);
+    }
+    function modificarAjax(e){
+        var valor = e.value;
+        const http = new XMLHttpRequest();
+        http.open("POST", "/usercrud", true);
+        http.responseType= "document";
+
+        http.onreadystatechange = function (){
+            if (this.readyState == 4 && this.status == 200){
+                var myHtml = this.response;
+                document.getElementById("modifyUser").innerHTML = myHtml.getElementById("modifyUser").outerHTML;
+            }
+        }
+        
+        http.setRequestHeader('Content-Type', 'application/json');
+        http.send(JSON.stringify({modifyUser : valor}));
+    }
+    function cambiarAjax(e){
+        var x = confirm('a');
+        var valor = e.value;
+        const http = new XMLHttpRequest();
+        http.open("POST", "/usercrud", true);
+        http.responseType= "document";
+
+        http.onreadystatechange = function (){
+            if (this.readyState == 4 && this.status == 200){
+                var myHtml = this.response;
+            }
+        }
+        
+        http.setRequestHeader('Content-Type', 'application/json');
+        http.send(JSON.stringify({enableUser : valor}));
+
+        var tr = e.parentNode.parentNode;
+        if (tr.className == "tr-usuario-on"){
+            tr.className = "tr-usuario-off";
+            e.textContent = "Habilitar";
+        }
+        else{
+            tr.className = "tr-usuario-on";
+            e.textContent = "Inhabilitar";
+        }
+    }
+</script>
+
+
+
 <div id="contenido">
     
 <!--Menú para buscar usuarios-->
 <table id="tabla_buscar_usuarios" width="50%">
     <form action="/search-user" method="POST">
-        <td> <input id="input_busqueda" type="text" placeholder="Buscar usuario" name="string_search" autocomplete="on"> </td>
+        <td> <input id="input_busqueda" type="text" placeholder="Buscar usuario" name="string_search" autocomplete="on" onkeyup="buscarAjax()"> </td>
         <td> <button type="submit"><ion-icon id="search_icon" name="search"></ion-icon></ion-icon> </button></td>
     </form>
 </table>
@@ -27,15 +97,15 @@
 <table id="tabla_usuarios" width="100%">
     {{#if usuarios}}{{else}}<tr><td>No se encontraron coincidencias</td></tr>{{/if}}
     {{#each usuarios}}
-    <tr {{#if estado}}class="tr-usuario-on"{{else}}class="tr-usuario-off"{{/if}}>
+    <tr id="{{usuario}}" {{#if estado}}class="tr-usuario-on"{{else}}class="tr-usuario-off"{{/if}}>
         <td>{{usuario}}</td>
         <td>{{correo}}</td>
         <td class="td-tipo">{{nivel}}</td>
         <td class="td-acc">
-            <form method="POST">
-                <button class="mod-btn" type="submit" name="modifyUser" value="{{usuario}}">Modificar</button> &nbsp 
-                <button class="hab-btn" type="submit" name="enableUser" value="{{usuario}}">{{#if estado}}Inhabilitar{{else}}Habilitar{{/if}}</button>
-            </form>
+            <!--<form method="POST">-->
+                <button class="mod-btn" type="submit" name="modifyUser" value="{{usuario}}" onclick="modificarAjax(this)">Modificar</button> &nbsp 
+                <button class="hab-btn" type="submit" name="enableUser" value="{{usuario}}" onclick="cambiarAjax(this)">{{#if estado}}Inhabilitar{{else}}Habilitar{{/if}}</button>
+            <!--</form>-->
         </td>
     </tr>
     {{/each}}
@@ -51,8 +121,9 @@
         {{/if}}
 
         <!--_________________Modificar usuario______________-->
-        {{#if modifyUser}}
+        
         <div id="modifyUser">
+            {{#if modifyUser}}
             <h3>Modificar usuario: {{modifyUser.usuario}}</h3>
             <form name="modifyForm" action="/modify-user" method="POST" onsubmit="">
                 <table id="tabla_form_add" style="visibility: ;">
@@ -72,8 +143,8 @@
                     </tr>
                 </table>
             </form>
-        </div>
-        {{/if}}   
+            {{/if}}  
+        </div> 
 
         <!--_________________Agregar usuario______________-->
         <button id="btn_nuevo_usuario" onclick="dropMenu(`agregarUsuario`)">Agregar nuevo usuario</button>

@@ -21,7 +21,7 @@ module.exports = class UserModel{
     async findUsersBySubstring(str){
         const usersRef = db.collection('usuarios');
         //Busqueda por nombre
-        const snapshot = await usersRef.where('usuario', '>=', str).where('usuario', '<=', str + '~').get();
+        const snapshot = await usersRef.where('usuario', '>=', str).where('usuario', '<=', str + '~').limit(20).get();
         var docs = snapshot.docs.map(doc => doc.data());
         return docs;
     }

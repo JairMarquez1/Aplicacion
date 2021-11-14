@@ -195,6 +195,8 @@ footer{
 }
 
 #modifyUser h3{
+    color: white;
+    font-weight: 100;
     font-size: 14px;
     border-bottom: 1px solid black;
     padding: 1% 0px;

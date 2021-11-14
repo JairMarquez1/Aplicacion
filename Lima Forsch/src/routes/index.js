@@ -6,10 +6,8 @@ const userController = require('../controllers/userController');
 
 
 router.get('/', (req,res) => {
-    if (req.session.usuario){
-        //console.log(req.session);
+    if (req.session.usuario)
         res.redirect('/index');
-    }
     else
         res.redirect('/login');
 });

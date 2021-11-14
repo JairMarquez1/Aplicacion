@@ -1,5 +1,6 @@
 const UserModel = require('../models/UserModel');
 const bcrypt = require('bcrypt');
+const 
 
 user = new UserModel();
 error = false;
@@ -20,7 +21,7 @@ async function iniciar_sesion(req, res) {
                 if(datos.usuario != 'Admin'){
                     req.session.usuario = datos.usuario;
                     req.session.rol = datos.nivel;
-                    res.render('index', {usuario: ('Bienvenido ' + datos.usuario).toString()});
+                    res.render('index', {usuario: datos.usuario});
                 }
                 else{
                     req.session.usuario = datos.usuario;
@@ -30,7 +31,7 @@ async function iniciar_sesion(req, res) {
 
             }
             else
-                res.render('login', { errorMsg: 'La cuenta fue inhabilitada' });
+                res.render('login', { errorMsg: 'La cuenta está inhabilitada' });
         }
         else
             res.render('login', { errorMsg: 'Los datos no son correctos' });
@@ -40,7 +41,7 @@ async function iniciar_sesion(req, res) {
     datos = null;
 }
 
-function cerrar_sesion (req, res) {
+function cerrar_sesion(req, res) {
     req.session.destroy(); 
     res.redirect('login');
 }
@@ -132,11 +133,12 @@ async function modificar_usuario(req, res) {
 
 async function buscar_usuario(req,res){
     obj = JSON.parse(JSON.stringify(req.body));
+    console.log('obj', obj);
     const { string_search } = obj;
     string_searchCap = firstCap(string_search);
     datos = await user.findUsersBySubstring(string_searchCap);
     //Redigire a la página anterior
-    res.redirect('back');
+    res.send('back');
 }
 
 

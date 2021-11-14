@@ -31,12 +31,13 @@
     width: 85%;       
     height: 300px;
     margin: 0px auto;
+    transition: all ease-in 0.2s;
 }
 
 .drop-area.active{
     background-color: rgb(162, 235, 162);
     color: black;
-    border: 2px dashed rgb(5, 90, 5);
+    border: 5px dashed rgb(5, 90, 5);
 }
 
 .drop-area span{

@@ -4,9 +4,11 @@ const exphbs = require('express-handlebars');
 const path = require('path');
 const bcrypt = require('bcrypt');
 const session = require('express-session');
+const bodyParser = require('body-parser');
 
 const app = express();
-
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true })); 
 
 //settings
 app.set('port', process.env.PORT || 3000);
@@ -25,6 +27,7 @@ app.use(session({
     resave: false,
     saveUninitialized: true
 }))
+
 
 //routes
 app.use(require('./routes/index.js'));
