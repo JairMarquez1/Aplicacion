@@ -16,13 +16,12 @@
 
         http.onreadystatechange = function (){
             if (this.readyState == 4 && this.status == 200){
-                //console.log('hola',this.response);
+                console.log('hola',this.response);
                 var myHtml = this.response;
                 document.getElementById("tabla_usuarios").innerHTML = myHtml.getElementById("tabla_usuarios").outerHTML;
             }
         }
         
-        //console.log(data);
         http.setRequestHeader('Content-Type', 'application/json');
         http.send(data);
     }

@@ -2,15 +2,24 @@
 
 
 <body>
-    <div class="div_contenedor"><br><br>
+    <div class="div_contenedor"><br>
+        
         <div class="drop-area">
+            <div id="progress_bar">
+                <div class="percent">
+                    0%
+                </div>
+            </div>
             <div id="c1" class="columna1"><img id="nube" class="nube" src="images/nube-descarga.jpg" ></img></div>
             <div id="c2" class="columna2">
                 <h1 style="padding-bottom: 3vw;">Subir Archivo</h1>
                 <h2>Arrastra y suelta los archivos</h2>
                 <span>O</span>
                 <button id="btn1">Selecciona un archivo</button>
-                <input type="file" id="input-file" hidden multiple}>
+                <!--<form action="/prueba" method="POST">-->
+                <input type="file" id="input-file"  hidden multiple="true">
+                <!--<input type="submit">
+                </form>-->
             </div>
         </div>
         <div id="preview"></div><br>
@@ -18,4 +27,6 @@
     </div>
 
     <script type="text/javascript" src="js/selectArchivo.js"></script>
+
+
 </body>

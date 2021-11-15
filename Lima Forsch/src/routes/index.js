@@ -46,6 +46,8 @@ router.get('/file-stats', (req,res) => {if(auth(req,res)) res.render('file-stats
 
 router.get('/subir-archivo', (req,res) => {if(auth(req,res)) res.render('subirArchivo');});
 
+router.post('/prueba', (req,res) => {res.send(req.files); console.log(req.files)});
+
 
 function auth(req,res){
     if (!req.session.usuario){

@@ -48,14 +48,14 @@ function cerrar_sesion(req, res) {
 
 async function cargar_crud(req, res) {
     if (req.session.rol == 'admin'){
-        variables = JSON.parse(JSON.stringify(req.body));
+        variables = Object.assign(variables,JSON.parse(JSON.stringify(req.body)));
         console.log('Variables:', variables);
 
         //Si se envió por POST un usuario para modificar, consulta sus datos y los envía para el formulario de modificación
         if (variables.modifyUser)
             result_modify = await user.findByName(variables.modifyUser);
         else
-            result_modify = false;
+            result_modify = null;
         //Si se envió por POST un usuario para habilitar/deshabilitar, se ejecuta la respectiva acción
         if (variables.enableUser){
             await user.changeUserStatus(variables.enableUser);
@@ -127,6 +127,7 @@ async function modificar_usuario(req, res) {
     }
     //Se actualiza el usuario en la base de datos
     user.updateUser(nuevosDatos, variables.modifyUser);
+    variables.modifyUser = null;
     //Redigire a la página anterior
     res.redirect('back');
 }
@@ -138,7 +139,7 @@ async function buscar_usuario(req,res){
     string_searchCap = firstCap(string_search);
     datos = await user.findUsersBySubstring(string_searchCap);
     //Redigire a la página anterior
-    res.send('back');
+    res.redirect('back');
 }
 
 
