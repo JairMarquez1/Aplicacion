@@ -10,7 +10,7 @@ async function cargar_lista(req, res){
     console.log(req.session);
     console.log(typeof(req.session.rol));
     if (datos == null){
-        datos = await fileM.findByLevel(req.session.rol, 10);
+        datos = await fileM.findByLevel(req.session.rol, 20);
     }
     console.log(datos);
 
@@ -55,6 +55,7 @@ async function subir_archivo(req,res){
                 fileM.uploadFile(file.data, user, nuevoArchivo);
             }
         });
+        res.redirect('index');
     }
     else
         res.render('index',{errorMsg: 'Ocurrió un error'});
