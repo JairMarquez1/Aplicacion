@@ -5,10 +5,10 @@ const path = require('path');
 const bcrypt = require('bcrypt');
 const session = require('express-session');
 const bodyParser = require('body-parser');
+const fileUpload = require('express-fileupload');
 
 const app = express();
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true })); 
+
 
 //settings
 app.set('port', process.env.PORT || 3000);
@@ -20,13 +20,27 @@ app.engine('hbs', exphbs({
 app.set('view engine', '.hbs');
 
 //midlewares
+
 app.use(morgan('dev'));
-app.use(express.urlencoded({extended: false}));
+
+app.use(fileUpload({ createParentPath: true }));
+app.use('/resources', express.static(path.resolve(__dirname, '../uploads')));
+app.use(express.urlencoded({extended: true}));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true })); 
+
+
+
 app.use(session({
     secret: 'asd',
     resave: false,
     saveUninitialized: true
 }))
+
+app.use(function (req, res, next) {
+    res.locals.session = req.session;
+    next();
+});
 
 
 //routes

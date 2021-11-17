@@ -42,29 +42,30 @@
         http.send(JSON.stringify({modifyUser : valor}));
     }
     function cambiarAjax(e){
-        var x = confirm('a');
-        var valor = e.value;
-        const http = new XMLHttpRequest();
-        http.open("POST", "/usercrud", true);
-        http.responseType= "document";
+        if (confirm('¿Desea cambiar el estado del usuario?')){
+            var valor = e.value;
+            const http = new XMLHttpRequest();
+            http.open("POST", "/usercrud", true);
+            http.responseType= "document";
 
-        http.onreadystatechange = function (){
-            if (this.readyState == 4 && this.status == 200){
-                var myHtml = this.response;
+            http.onreadystatechange = function (){
+                if (this.readyState == 4 && this.status == 200){
+                    var myHtml = this.response;
+                }
             }
-        }
-        
-        http.setRequestHeader('Content-Type', 'application/json');
-        http.send(JSON.stringify({enableUser : valor}));
+            
+            http.setRequestHeader('Content-Type', 'application/json');
+            http.send(JSON.stringify({enableUser : valor}));
 
-        var tr = e.parentNode.parentNode;
-        if (tr.className == "tr-usuario-on"){
-            tr.className = "tr-usuario-off";
-            e.textContent = "Habilitar";
-        }
-        else{
-            tr.className = "tr-usuario-on";
-            e.textContent = "Inhabilitar";
+            var tr = e.parentNode.parentNode;
+            if (tr.className == "tr-usuario-on"){
+                tr.className = "tr-usuario-off";
+                e.textContent = "Habilitar";
+            }
+            else{
+                tr.className = "tr-usuario-on";
+                e.textContent = "Inhabilitar";
+            }
         }
     }
 </script>

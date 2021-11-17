@@ -32,55 +32,15 @@
 
 <div id="table-scroll">
 <table id="tabla_archivos" width="100%">
+    {{#if archivos}}{{else}}No hay archivos disponibles{{/if}}
+    {{#each archivos}}
     <tr>
-      <td>nombre_archivo.formato</td>
-      <td>04/10/2021 20:04</td>
-      <td>10kb</td>
-      <td>Everardo</td>
+      <td>{{nombre}}</td>
+      <td>{{fecha}}</td>
+      <td>{{tamano}}</td>
+      <td>{{propietario}}</td>
     </tr>
-    <tr>
-      <td>nombre_archivo.formato</td>
-      <td>04/10/2021 20:04</td>
-      <td>10kb</td>
-      <td>Everardo</td>
-    </tr>
-    <tr>
-      <td>nombre_archivo.formato</td>
-      <td>04/10/2021 20:04</td>
-      <td>10kb</td>
-      <td>Everardo</td>
-    </tr>
-    <tr>
-      <td>nombre_archivo.formato</td>
-      <td>04/10/2021 20:04</td>
-      <td>10kb</td>
-      <td>Everardo</td>
-    </tr>
-    <tr>
-      <td>nombre_archivo.formato</td>
-      <td>04/10/2021 20:04</td>
-      <td>10kb</td>
-      <td>Everardo</td>
-    </tr>
-    <tr>
-      <td>nombre_archivo.formato</td>
-      <td>04/10/2021 20:04</td>
-      <td>10kb</td>
-      <td>Everardo</td>
-    </tr>
-    <tr>
-      <td>nombre_archivo.formato</td>
-      <td>04/10/2021 20:04</td>
-      <td>10kb</td>
-      <td>Everardo</td>
-    </tr>
-    <tr>
-      <td>nombre_archivo.formato</td>
-      <td>04/10/2021 20:04</td>
-      <td>10kb</td>
-      <td>Everardo</td>
-    </tr>
-
+    {{/each}}
 </table>
 </div>
 

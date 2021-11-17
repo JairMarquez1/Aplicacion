@@ -1,4 +1,4 @@
-const db = require('../routes/connection');
+const db = require('../routes/connection').db;
 
 module.exports = class UserModel{
 

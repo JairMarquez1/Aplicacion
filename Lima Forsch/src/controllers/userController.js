@@ -1,6 +1,5 @@
 const UserModel = require('../models/UserModel');
 const bcrypt = require('bcrypt');
-const 
 
 user = new UserModel();
 error = false;
@@ -10,7 +9,7 @@ datos = null;
 async function iniciar_sesion(req, res) {
     obj = JSON.parse(JSON.stringify(req.body));
     const { usuario, contrasena } = obj;
-
+    console.log('objLogin', obj);
     usuarioCap = firstCap(usuario);
     //Se busca el usuario en la base de datos
     datos = await user.findByName(usuarioCap);
@@ -21,7 +20,7 @@ async function iniciar_sesion(req, res) {
                 if(datos.usuario != 'Admin'){
                     req.session.usuario = datos.usuario;
                     req.session.rol = datos.nivel;
-                    res.render('index', {usuario: datos.usuario});
+                    res.redirect('index');
                 }
                 else{
                     req.session.usuario = datos.usuario;

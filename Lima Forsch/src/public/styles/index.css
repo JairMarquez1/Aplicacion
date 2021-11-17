@@ -82,6 +82,7 @@ body{
 #tabla_archivos td{
     padding: 5px 5px;
     overflow-x: hidden;
+    text-overflow: ellipsis;
 }
 
 #tabla_archivos tr:hover{

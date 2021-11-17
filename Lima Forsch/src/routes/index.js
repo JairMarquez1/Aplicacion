@@ -3,6 +3,7 @@ const router = Router();
 const db = require('../routes/connection');
 
 const userController = require('../controllers/userController');
+const fileController = require('../controllers/fileController');
 
 
 router.get('/', (req,res) => {
@@ -28,17 +29,20 @@ router.get('/usercrud', userController.cargar_crud);
 
 router.post('/usercrud', userController.cargar_crud);
 
+router.get('/registro', (req,res) => {if(notLogged(req,res)) userController.cargar_registro(req,res);});
+
+    //Acciones
+
 router.post('/add-user', userController.crear_usuario);
 
 router.post('/modify-user', userController.modificar_usuario);
 
 router.post('/search-user', userController.buscar_usuario);
 
-router.get('/registro', (req,res) => {if(notLogged(req,res)) userController.cargar_registro(req,res);});
 
 //Archivos------------------------
 
-router.get('/index', (req,res) => {if(auth(req,res)) res.render('index');});
+router.get('/index', (req,res) => {if(auth(req,res)) fileController.cargar_lista(req,res);});
 
 router.get('/visualizar', (req,res) => {if(auth(req,res)) res.render('visualizar');});
 
@@ -46,7 +50,10 @@ router.get('/file-stats', (req,res) => {if(auth(req,res)) res.render('file-stats
 
 router.get('/subir-archivo', (req,res) => {if(auth(req,res)) res.render('subirArchivo');});
 
-router.post('/prueba', (req,res) => {res.send(req.files); console.log(req.files)});
+    //Acciones
+
+router.post('/upload', fileController.subir_archivo);
+
 
 
 function auth(req,res){

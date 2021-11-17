@@ -8,6 +8,7 @@ body{
     background-color: #D5FAE8;
     background: url('../images/bg2.jpg') no-repeat;
     background-size: cover;
+    width: 100%;
 }
 
 
@@ -21,10 +22,12 @@ header{
 
 #logo{
     height: 10vh;
+    transition: all 0.1s ease-in-out;
 }
 
 #logo:hover{
     cursor:pointer;
+    filter: drop-shadow(0px 0px 20px #44dd44);
 }
 
 /*nav{
@@ -53,7 +56,7 @@ header{
 .btn2{
     background-color: #8EEC92;
     border: none;
-    padding: 10px 30px;
+    padding: 10px 15px;
 }
 
 .btn2:hover{
@@ -78,22 +81,29 @@ li{
     background: gray;
     border-radius: 5px;
     padding: 5px;
-    
+    transition: all 0.2s ease-in-out;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+#logout:hover{
+    background-color: rgb(109, 109, 109);
 }
 
 #aux{
+    position: relative;
     width: 100%;
-    margin-top: 7vh;
     text-align: end;
 }
 
 @media (max-width:990px){
-    .btn1{
+    .btn1, #usuario{
         padding: 1vw;
         font-size: 2.5vw;
     }
     #logout{
-        font-size: 1.4vw;
+        font-size: 1.8vw;
         padding: 2px;
     }
 }
