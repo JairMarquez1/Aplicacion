@@ -18,7 +18,7 @@
         <img id="logo" src="images/logo_lima.png" onclick="window.location='/';"></img>      
         <div id="aux">
             {{#if session.usuario}}
-            <div id="usuario">Usuario: {{session.usuario}}<br>Nivel:{{session.rol}}</div>
+            <div id="nombre_usuario">Usuario: {{session.usuario}}<br>Nivel:{{session.rol}}</div>
             {{/if}}
         <form style="align-self: self-end;" action="/logout" method="POST"> 
             <button type="submit" id="logout" onclick="window.location='/login';">Cerrar sesión</button>

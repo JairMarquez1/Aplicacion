@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     font-family: 'Inter', sans-serif;
+    cursor: default;
 }
 
 body{
@@ -11,17 +12,17 @@ body{
     width: 100%;
 }
 
-
 header{
     display: flex;
-    background-color: #D5FAE8; /*#577064*/
+    background-color: #D5FAE8;
     padding: 12px;
-    height: 10vh;
-    /*float: left;*/
+}
+
+li{
+    list-style-type: none;  
 }
 
 #logo{
-    height: 10vh;
     transition: all 0.1s ease-in-out;
 }
 
@@ -30,27 +31,11 @@ header{
     filter: drop-shadow(0px 0px 20px #44dd44);
 }
 
-/*nav{
-    background-color: #D5FAE8;
-    text-align: end;
-    height: 10vh;
-    padding: 12px;
-    font-size: 50px;
-}*/
-
-
 
 .btn1{
     font-family: Arial, Helvetica, sans-serif;
     border: 0;
     border-radius: 0;
-    padding: 2vh 3vw;
-    font-size: large;
-}
-
-.btn1:hover{
-    cursor: pointer;
-    text-shadow: 0px 0px 2px black;
 }
 
 .btn2{
@@ -59,37 +44,26 @@ header{
     padding: 10px 15px;
 }
 
-.btn2:hover{
-    box-shadow: 1px 1px 3px black;
-}
-
-li{
-    list-style-type: none;  
-}
-
-.inpt1{
-    border: 1px solid black;
-    background-color: rgb(243, 243, 243);
-    font-size: 16px;
-    padding: 4px 5px;
-    margin-top: 4px;
+.btn1:hover, .btn2:hover, #logout:hover{
+    filter: brightness(0.90);
+    cursor: pointer;
+    transition: all 0.2s ease-out;
 }
 
 #logout{
-    cursor: pointer;
     color: white;
     background: gray;
-    border-radius: 5px;
-    padding: 5px;
-    transition: all 0.2s ease-in-out;
     position: absolute;
     bottom: 0;
     right: 0;
 }
 
-#logout:hover{
-    background-color: rgb(109, 109, 109);
+.btn1, #nombre_usuario, #logout{
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 14px;
 }
+
 
 #aux{
     position: relative;
@@ -97,13 +71,31 @@ li{
     text-align: end;
 }
 
-@media (max-width:990px){
-    .btn1, #usuario{
-        padding: 1vw;
-        font-size: 2.5vw;
-    }
-    #logout{
-        font-size: 1.8vw;
+
+@media (max-width:990px) {
+    .btn1, #nombre_usuario, #logout{
         padding: 2px;
+        font-size: 10px;
+    }
+    input[type="radio"]{
+        width: 10px;
+    }
+}
+
+
+@media (min-height:800px){
+    header{
+        height: 10vh;
+    }
+}
+
+@media (max-height:799px){
+    .btn1, #nombre_usuario, #logout{
+        padding: 3px;
+        font-size: 10px;
+    }
+
+    header{
+        height: 60px;
     }
 }

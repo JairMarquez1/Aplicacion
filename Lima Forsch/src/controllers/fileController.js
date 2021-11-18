@@ -8,11 +8,9 @@ datos = null;
 
 async function cargar_lista(req, res){
     console.log(req.session);
-    console.log(typeof(req.session.rol));
     if (datos == null){
-        datos = await fileM.findByLevel(req.session.rol, 20);
+        datos = await fileM.findByLevel(req.session.rol, 30);
     }
-    console.log(datos);
 
     res.render('index',{
         archivos: datos

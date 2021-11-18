@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="styles/index.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <div id="contenido">
 
@@ -21,6 +22,7 @@
     </form>
 </table>
 
+<div style="margin:0 10px 0px 10px;">
 <table id="tabla_archivos_header">
     <tr>
       <th>Nombre</th>
@@ -29,20 +31,22 @@
       <th>Autor</th>
   </tr>
 </table>
+</div>
 
 <div id="table-scroll">
 <table id="tabla_archivos" width="100%">
     {{#if archivos}}{{else}}No hay archivos disponibles{{/if}}
     {{#each archivos}}
-    <tr>
-      <td>{{nombre}}</td>
-      <td>{{fecha}}</td>
-      <td>{{tamano}}</td>
-      <td>{{propietario}}</td>
+    <tr class="{{extension}}" onclick="preview(this,{{nivel}})">
+      <td class="nombre"><i class="{{extension}}" style="margin-right:5px;"></i>{{nombre}}</td>
+      <td class="fecha">{{fecha}}</td>
+      <td class="tamano">{{tamano}}</td>
+      <td class="propietario">{{propietario}}</td>
     </tr>
     {{/each}}
 </table>
 </div>
+
 
 <footer>
         <button id="btn_subir" class="btn1" onclick="window.location='/subir-archivo';">Subir archivo</button>
@@ -50,18 +54,128 @@
 
 </div>
 
-<aside id="lateral">
+<aside id="lateral" style="visibility: hidden;">
   <div style="margin: 10px; width:100%"><br>
-    <ion-icon id="file-icon" name="document-sharp"></ion-icon><br><br>
+    <div style="text-align:start;"><ion-icon name="arrow-forward-outline" onclick="hidePreview()"></ion-icon></div><br>
+    <i id="file-icon" class="fa fa-file"></i><br><br>
     <table>
-      <li><b>Detalles</b></li><br>
-      <li>Nombre del archivo:</li><br>
-      <li>Tipo de archivo:</li><br>
-      <li>Tamaño:</li><br>
-      <li>Fecha de creación:</li><br>
-      <li>Modificación:</li><br>
+      <li style="color:dimgrey;">Nombre del archivo:</li>
+      <li id='nombrePrev'></li><br>
+      <li style="color:dimgrey;">Tipo de archivo:</li>
+      <li id='tipoPrev'></li><br>
+      <li style="color:dimgrey;">Tamaño:</li>
+      <li id='tamanoPrev'></li><br>
+      <li style="color:dimgrey;">Fecha de creación:</li>
+      <li id='fechaPrev'></li><br>
+      <li style="color:dimgrey;">Autor:</li>
+      <li id='autorPrev'></li><br>
+      <li style="color:dimgrey;">Nivel:</li>
+      <li id='nivelPrev'></li><br>
       <li><button class="btn1">Descargar</button></li><br>
       <li><button class="btn1" onclick="window.location='/visualizar';">Visualizar</button></li><br>
     </table>
   </div>
 </aside>
+  
+
+<script>
+  fechas = Array.from(document.getElementsByClassName('fecha'));
+  fechas.forEach(fecha =>{
+      var d = new Date(parseInt(fecha.textContent));
+      d = d.toLocaleString();
+      fecha.innerHTML = d;
+  });
+
+  iconos = Array.from(document.getElementsByTagName('i'));
+  iconos.forEach(icono =>{
+      var tipo = getType(icono.className);
+      icono.className = 'fa fa-file' + tipo[0]  + '-o';
+      icono.style.color = tipo[1];
+  })
+
+  pesos = Array.from(document.getElementsByClassName('tamano'));
+  pesos.forEach(peso=>{
+      var p = formatBytes(parseInt(peso.textContent));
+      peso.innerHTML = p;
+  })
+
+  const contenido = document.getElementById('contenido');
+  const lateral = document.getElementById('lateral');
+  const iconoPrev = document.getElementById('file-icon');
+  const nombrePrev = document.getElementById('nombrePrev');
+  const tipoPrev = document.getElementById('tipoPrev');
+  const tamanoPrev = document.getElementById('tamanoPrev');
+  const fechaPrev = document.getElementById('fechaPrev');
+  const autorPrev = document.getElementById('autorPrev');
+  const nivelPrev = document.getElementById('nivelPrev');
+
+  function preview(e, nivel){
+      var icono = e.getElementsByTagName('i')[0].className;
+      var color = e.getElementsByTagName('i')[0].style.color;
+      var nombre = e.getElementsByClassName('nombre')[0].textContent;
+      var autor = e.getElementsByClassName('propietario')[0].textContent;
+      var tamano = e.getElementsByClassName('tamano')[0].textContent;
+      var fecha = e.getElementsByClassName('fecha')[0].textContent;
+      iconoPrev.className = icono;
+      iconoPrev.style.color = color;
+      nombrePrev.innerHTML = nombre;
+      tipoPrev.innerHTML = e.className.toUpperCase();
+      tamanoPrev.innerHTML = tamano;
+      fechaPrev.innerHTML = fecha;
+      autorPrev.innerHTML = autor; 
+      nivelPrev.innerHTML = nivel;
+      if (lateral.style.visibility == 'hidden'){
+        lateral.style.visibility = 'initial';
+        lateral.style.position = 'initial';
+        contenido.style.width = '70%';
+      }
+  }
+
+  function hidePreview(){
+      if (lateral.style.visibility == 'initial'){
+        contenido.style.width = '100%';
+        lateral.style.visibility = 'hidden';
+        lateral.style.position = 'absolute';
+      }
+  }
+
+  function getType(ext){ 
+    ext = ext.toLowerCase(); 
+    if (ext == 'pdf')
+      return ['-pdf','orangered'];
+    else if (ext.match(/(txt|ini|md)$/i))
+      return ['-text','black'];
+    else if (ext.match(/(doc|docx)$/i))
+      return ['-word','dodgerblue'];
+    else if (ext.match(/(xls|xlsx)$/i))
+      return ['-excel','forestgreen'];
+    else if (ext.match(/(zip|rar|tar|gzip|gz|7z)$/i))
+      return ['-zip', 'gray'];
+    else if (ext.match(/(jpg|jpeg|png)$/i))
+      return ['-image','olive'];
+    else if (ext.match(/(ppt|pptx)$/i))
+      return ['-powerpoint','tomato'];
+    else if (ext.match(/(mp3|wav|mp2|m4a|aac)$/i))
+      return ['-audio','indigo'];
+    else if(ext.match(/(avi|mpg|mkv|mov|mp4|3gp|webm|wmv)$/i))
+      return ['-video','mediumpurple'];
+    else if(ext.match(/(php|js|css|htm|html)$/i))
+      return ['-code','goldenrod'];
+    else
+      return ['','black'];
+
+  }
+
+  function formatBytes(bytes, decimals = 2) {
+    if (bytes === 0) return '0 Bytes';
+
+    const k = 1024;
+    const dm = decimals < 0 ? 0 : decimals;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+}
+
+</script>

@@ -23,6 +23,7 @@ button{
     outline: none;
     font-size: 18px;
     margin-left: 16px;
+    cursor: text;
 }
 
 #input_busqueda::placeholder{
@@ -174,6 +175,7 @@ footer{
     border: none;
     border-bottom: 2px solid black;
     background-color: transparent;
+    cursor: text;
 }
 
 .input_form:focus{

@@ -3,16 +3,17 @@ body{
 }
 
 #contenido{
-    margin-left: 16px;
-    width: 70%;
+    width: 100%;
     height: 85vh;
     float: left;
+    transition: all 0.5s ease-in-out;
 }
 
 /*-----------Barra busqueda----------*/
 
 #tabla_busqueda{
-    height: 8vh;
+    margin-left: 10px;
+    height: 44px;
 }
 
 #input_busqueda{
@@ -22,6 +23,7 @@ body{
     width: 95%;
     outline: none;
     font-size: 18px;
+    cursor: text;
 }
 
 #input_busqueda::placeholder{
@@ -58,7 +60,9 @@ body{
 /*-----------Tabla archivos----------*/
 
 #tabla_archivos_header{
-    height: 4vh;
+    height: 30px;
+    border-spacing:0 0px; 
+    width: 100%; 
 }
 
 #tabla_archivos_header th{
@@ -69,53 +73,62 @@ body{
 }
 
 #table-scroll {
-    height:59vh;
+    margin: 0 10px 0px 10px;
+    height: 60vh;
     overflow:auto;  
 }
 
 #tabla_archivos{
     border-collapse:separate;
-    border-spacing:0 5px;  
+    border-spacing:0px 0px;  
     table-layout: fixed; 
+    white-space: nowrap;
 }
 
 #tabla_archivos td{
     padding: 5px 5px;
     overflow-x: hidden;
     text-overflow: ellipsis;
+    border-top: 1px solid rgb(173, 173, 173);
 }
 
 #tabla_archivos tr:hover{
+    filter: brightness(0.95);
     cursor: pointer;
-    box-shadow: 0px 0px 5px black;
     transition: all 0.1s ease-out;
 }
 
-#tabla_archivos tr:nth-child(even) {background: #EFEFEF}
+.fecha, .tamano{
+    color: gray;
+}
+
+#tabla_archivos tr:nth-child(even) {background: #E5F6EC} /*#EFEFEF*/
 #tabla_archivos tr:nth-child(odd) {background: #E5F6EC}
 
 /*----------Barra lateral--------*/
 
 #lateral{
-    height: 85vh;
+    height: calc(80vh + 74px);
     background-color: #C4C4C4;
     display: flex;
     text-align: center;
-    align-items: center;
+    overflow-x: hidden;
+    position: absolute;
+    visibility: hidden;
 }
 
 /*----------Footer----------*/
 
 footer{
     background-color: #6A6A6A;
-    height: 14vh;
+    height: 20vh;
     display: flex;
-    justify-content: end;
+    justify-content: center;
     align-items: center;
 }
 
 #btn_subir{
-    margin-right: 5vw;
+    font-size: 16px;
 }
 
 #file-icon{
@@ -124,12 +137,24 @@ footer{
 
 
 @media (max-width:990px){
-    #tabla_archivos, #tabla_archivos_header, #input_busqueda, #search_icon, .radioBusquedaSpan, #lateral{
+    #tabla_archivos, #tabla_archivos_header, #input_busqueda, #search_icon, .radioBusquedaSpan, #lateral, .fa{
         font-size: 1.7vw;
     }
 
     #lateral{
         align-items: start;
+    }
+
+}
+
+@media (max-height:550px){
+    #table-scroll{
+        height: 350px !important;
+    }
+
+    #lateral{
+        height: calc(20vh + 424px);
+        font-size: 12px;
     }
 
 }
