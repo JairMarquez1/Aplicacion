@@ -108,7 +108,7 @@ body{
 /*----------Barra lateral--------*/
 
 #lateral{
-    height: calc(80vh + 74px);
+    height: calc(80vh + 44px);
     background-color: #C4C4C4;
     display: flex;
     text-align: center;
@@ -153,7 +153,7 @@ footer{
     }
 
     #lateral{
-        height: calc(20vh + 424px);
+        height: calc(20vh + 394px);
         font-size: 12px;
     }
 

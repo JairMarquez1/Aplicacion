@@ -69,8 +69,8 @@
   <tbody>
     {{#each archivos}}
     <tr class="{{extension}}" onclick="preview(this,{{nivel}})">
-      <td class="nombre"><i class="{{extension}}" style="margin-right:5px;"></i>{{nombre}}</td>
-      <td class="fecha">{{fecha}}</td>
+      <td class="nombre" title="{{nombre}}"><i class="{{extension}}" style="margin-right:5px;"></i>{{nombre}}</td>
+      <td class="fecha" title="{{fecha}}">{{fecha}}</td>
       <td class="tamano">{{tamano}}</td>
       <td class="propietario">{{propietario}}</td>
     </tr>
@@ -152,7 +152,7 @@
       iconoPrev.className = icono;
       iconoPrev.style.color = color;
       nombrePrev.innerHTML = nombre;
-      tipoPrev.innerHTML = e.className.toUpperCase();
+      tipoPrev.innerHTML = e.className.substring(0,e.className.indexOf(' ')).toUpperCase();
       tamanoPrev.innerHTML = tamano;
       fechaPrev.innerHTML = fecha;
       autorPrev.innerHTML = autor; 
@@ -167,8 +167,10 @@
   function hidePreview(){
       if (lateral.style.visibility == 'initial'){
         contenido.style.width = '100%';
+        setTimeout(function(){
         lateral.style.visibility = 'hidden';
         lateral.style.position = 'absolute';
+        }, 400);
       }
   }
 
