@@ -1,6 +1,26 @@
 <link rel="stylesheet" href="styles/index.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="styles/dataTables/datatables.min.css"/>
+<script type="text/javascript" src="styles/dataTables/datatables.min.js"></script>
+
+<script> 
+  $(document).ready( function () {
+    $('#tabla_archivos').DataTable({
+      columnDefs: [{ type: 'file-size', targets: 2 }],
+      order: [0, 'desc'],
+      language: {
+        'search': 'Filtrar: ',
+        'info': '',
+        'lengthMenu': 'Mostrar _MENU_ resultados'
+      }
+    });
+
+});
+</script>
+
+
 <div id="contenido">
 
 <table id="tabla_busqueda" width="100%">
@@ -22,6 +42,7 @@
     </form>
 </table>
 
+<!--
 <div style="margin:0 10px 0px 10px;">
 <table id="tabla_archivos_header">
     <tr>
@@ -32,10 +53,20 @@
   </tr>
 </table>
 </div>
+-->
 
 <div id="table-scroll">
+{{#if archivos}}
 <table id="tabla_archivos" width="100%">
-    {{#if archivos}}{{else}}No hay archivos disponibles{{/if}}
+  <thead style="background-position !important: center;">
+    <tr>
+      <th>Nombre</th>
+      <th>Fecha</th>
+      <th>Tamaño</th>
+      <th>Autor</th>
+    </tr>
+  </thead>
+  <tbody>
     {{#each archivos}}
     <tr class="{{extension}}" onclick="preview(this,{{nivel}})">
       <td class="nombre"><i class="{{extension}}" style="margin-right:5px;"></i>{{nombre}}</td>
@@ -44,7 +75,9 @@
       <td class="propietario">{{propietario}}</td>
     </tr>
     {{/each}}
+    </tbody>
 </table>
+{{else}}<br>No hay archivos disponibles{{/if}}
 </div>
 
 
@@ -82,7 +115,7 @@
   fechas = Array.from(document.getElementsByClassName('fecha'));
   fechas.forEach(fecha =>{
       var d = new Date(parseInt(fecha.textContent));
-      d = d.toLocaleString();
+      d = d.toISOString().replace('T',' &nbsp ').replace('Z',' ').replaceAll('-','/').substring(0,25);
       fecha.innerHTML = d;
   });
 
@@ -166,16 +199,16 @@
 
   }
 
-  function formatBytes(bytes, decimals = 2) {
-    if (bytes === 0) return '0 Bytes';
-
+  function formatBytes(bytes, decimals = 1) {
+    if (bytes === 0) return '0 B';
+    /*return Math.floor(bytes/1024);*/  
     const k = 1024;
     const dm = decimals < 0 ? 0 : decimals;
-    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-
+    const sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
     const i = Math.floor(Math.log(bytes) / Math.log(k));
-
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+    return  parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
 }
 
 </script>
+
+

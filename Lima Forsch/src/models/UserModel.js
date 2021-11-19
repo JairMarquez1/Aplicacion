@@ -53,8 +53,8 @@ module.exports = class UserModel{
     }
 
 
-    async updateUser(datos,nombre){  //Actualiza la información del usuario proporcionada mediante un JSON
-        const userRef = db.collection('usuarios').doc(nombre)
+    async updateUser(datos,id){  //Actualiza la información del usuario proporcionada mediante un JSON
+        const userRef = db.collection('usuarios').doc(id)
         await userRef.update(datos);
     }
 

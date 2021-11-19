@@ -158,3 +158,15 @@ footer{
     }
 
 }
+
+@media (max-width:990px){
+    .dataTables_length, .dataTables_filter{
+        width: auto;
+    }
+    .dataTables_length *, .dataTables_filter *, .dataTables_paginate *, .dataTables_info, .dataTables_paginate{
+        font-size: 1.6vw;
+        padding: 1px !important;
+        height: auto;
+        margin: 0 !important;
+    }
+}
