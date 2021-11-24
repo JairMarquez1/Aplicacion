@@ -1,10 +1,6 @@
 <link rel="stylesheet" href="styles/usercrud.css">
 <script type="text/javascript" src="js/forms.js"></script>
 
-
-
-<!--<button id="boton" onclick="ajax()">Buscar</button>-->
-
 <script>
     function buscarAjax(){
         var input = document.getElementById("input_busqueda");
@@ -76,10 +72,8 @@
     
 <!--Menú para buscar usuarios-->
 <table id="tabla_buscar_usuarios" width="50%">
-    <form action="/search-user" method="POST">
-        <td> <input id="input_busqueda" type="text" placeholder="Buscar usuario" name="string_search" autocomplete="on" onkeyup="buscarAjax()"> </td>
-        <td> <button type="submit"><ion-icon id="search_icon" name="search"></ion-icon></ion-icon> </button></td>
-    </form>
+        <td> <input id="input_busqueda" type="text" placeholder="Buscar usuario" name="string_search" autocomplete="on" onkeyup="/*buscarAjax()*/"> </td>
+        <td> <button onclick="buscarAjax()"><ion-icon id="search_icon" name="search"></ion-icon></ion-icon> </button></td>
 </table>
 
 <!--Cabecera de la tabla usuarios-->
@@ -174,8 +168,6 @@
     </div>
 
 </footer>
-
-
 
 
 </div>

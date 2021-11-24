@@ -1,4 +1,7 @@
 const db = require('../routes/connection').db;
+const FileModel = require('../models/FileModel');
+fileM = new FileModel();
+
 
 module.exports = class UserModel{
 
@@ -54,8 +57,14 @@ module.exports = class UserModel{
 
 
     async updateUser(datos,id){  //Actualiza la información del usuario proporcionada mediante un JSON
+        const datosAnterior = await this.findByName(id);
         const userRef = db.collection('usuarios').doc(id)
         await userRef.update(datos);
+
+        //Triggers
+        if (datos.nivel != datosAnterior.nivel)
+            this.onUpdateLevel(id, datos.nivel);
+        
     }
 
     async changeUserStatus(nombre){
@@ -67,6 +76,17 @@ module.exports = class UserModel{
         else
             var nuevoEstado = 1;
         await userRef.update({estado: nuevoEstado});
+    }
+
+
+
+    async onUpdateLevel(id, newLevel){
+        const docs = await fileM.findByUser(id,200);
+        docs.forEach(doc=> {
+            var fileId = doc.propietario + doc.nombre + doc.fecha;
+            fileM.updateLevel(fileId, newLevel);
+        });
+
     }
 
 

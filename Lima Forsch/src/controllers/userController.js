@@ -24,7 +24,7 @@ async function iniciar_sesion(req, res) {
                 }
                 else{
                     req.session.usuario = datos.usuario;
-                    req.session.rol = 'admin';
+                    req.session.rol = 4;
                     res.redirect('/usercrud');
                 }
 
@@ -46,7 +46,7 @@ function cerrar_sesion(req, res) {
 }
 
 async function cargar_crud(req, res) {
-    if (req.session.rol == 'admin'){
+    if (req.session.rol == 4){
         variables = Object.assign(variables,JSON.parse(JSON.stringify(req.body)));
         console.log('Variables:', variables);
 
@@ -63,7 +63,7 @@ async function cargar_crud(req, res) {
 
         //Por defecto obtienen los datos de los últimos 20 usuarios para listarse en la tabla
         if(datos == null){
-            datos = await user.getUsers(20);
+            datos = await user.getUsers(8);
         }
 
         //Se renderiza la plantilla con los datos obtenidos

@@ -61,3 +61,12 @@ function validateRegisterForm() {
 function color(element){
   element.style.backgroundColor = "";
 }
+
+
+function changeSearch(e,inpId){
+    const inp = document.getElementById(inpId);
+    if (e.value == 0)
+      inp.placeholder = 'Ingresa el título';
+    else
+      inp.placeholder = 'Ingresa una palabra';
+}

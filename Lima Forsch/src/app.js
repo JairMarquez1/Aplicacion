@@ -6,6 +6,7 @@ const bcrypt = require('bcrypt');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const fileUpload = require('express-fileupload');
+const cors = require('cors');
 
 const app = express();
 
@@ -28,7 +29,7 @@ app.use('/resources', express.static(path.resolve(__dirname, '../uploads')));
 app.use(express.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true })); 
-
+app.use(cors({credentials: true, origin: true}));
 
 
 app.use(session({

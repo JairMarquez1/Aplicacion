@@ -4,69 +4,76 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" href="styles/dataTables/datatables.min.css"/>
 <script type="text/javascript" src="styles/dataTables/datatables.min.js"></script>
+<script type="text/javascript" src="js/forms.js"></script>
+<script type="text/javascript" src="js/docToText.js"></script>
+<script type="text/javascript" src="js/searchContent.js"></script>
+
+
 
 <script> 
-  $(document).ready( function () {
-    $('#tabla_archivos').DataTable({
-      columnDefs: [{ type: 'file-size', targets: 2 }],
-      order: [0, 'desc'],
-      language: {
-        'search': 'Filtrar: ',
-        'info': '',
-        'lengthMenu': 'Mostrar _MENU_ resultados'
-      }
-    });
+  function buscarAjax(){
+      var input = document.getElementById("input_busqueda");
+      var radio = document.querySelector('input[name="tipo_busqueda"]:checked').value;
+      var data =  JSON.stringify({ string_search: input.value.toLocaleLowerCase() , tipo_busqueda : radio })
 
-});
+      const http = new XMLHttpRequest();
+      http.open("POST", "/search-file", true);
+      http.responseType= "document";
+
+      http.onreadystatechange = function (){
+          if (this.readyState == 4 && this.status == 200){
+              var myHtml = this.response;
+              console.log(myHtml)
+              document.getElementById("tabla_archivos").innerHTML = myHtml.getElementById("tabla_archivos").outerHTML;
+              tableReload();
+          }
+      }
+      
+      http.setRequestHeader('Content-Type', 'application/json');
+      http.send(data);
+  }
 </script>
 
 
 <div id="contenido">
 
 <table id="tabla_busqueda" width="100%">
-    <form>
+    <!--<form action="search-file" method="POST">-->
     <tr>
-        <td width="30%"> <input id="input_busqueda" type="text" placeholder="Buscar archivo"> </td>
-        <td width="5%"> <ion-icon id="search_icon" name="search"></ion-icon></ion-icon> </td>
+        <td width="30%"> <input id="input_busqueda" name="string_search" type="text" placeholder="Ingresa el título"> </td>
+        <td width="5%"> <button  id="search_button" onclick="buscarAjax()"><ion-icon id="search_icon" name="search"></ion-icon></button> </td>
         <td>
             <ul>
                 <li>
-                    <input class="radioBusqueda" type="radio" name="opcion"> <span class="radioBusquedaSpan">Buscar por título</span>
+                    <input class="radioBusqueda" type="radio" name="tipo_busqueda" value="0" onclick="changeSearch(this,'input_busqueda')" checked> <span class="radioBusquedaSpan">Buscar por título</span>
                 </li>
                 <li>
-                    <input class="radioBusqueda" type="radio" name="opcion"> <span class="radioBusquedaSpan">Buscar por contenido</span>
+                    <input class="radioBusqueda" type="radio" name="tipo_busqueda" value="1" onclick="changeSearch(this,'input_busqueda')"> <span class="radioBusquedaSpan">Buscar por contenido</span>
                 </li>
             </ul>
         </td>
     </tr>
-    </form>
+    <!--</form>-->
 </table>
-
-<!--
-<div style="margin:0 10px 0px 10px;">
-<table id="tabla_archivos_header">
-    <tr>
-      <th>Nombre</th>
-      <th>Fecha</th>
-      <th>Tamaño</th>
-      <th>Autor</th>
-  </tr>
-</table>
-</div>
--->
-
 <div id="table-scroll">
-{{#if archivos}}
 <table id="tabla_archivos" width="100%">
   <thead style="background-position !important: center;">
     <tr>
-      <th>Nombre</th>
+      <th>Nombre
+{{#if datosBusqueda}}
+<div id="loading">
+<img width="15px" src="images/loading.gif">
+<img style="visibility: hidden;" id="{{string_search}}" onerror="filtrarPorContenido('{{datosBusqueda}}','{{string_search}}')" src="{{string_search}}">
+</div>
+{{/if}}
+    </th>
       <th>Fecha</th>
       <th>Tamaño</th>
       <th>Autor</th>
     </tr>
   </thead>
   <tbody>
+    {{#if archivos}}
     {{#each archivos}}
     <tr class="{{extension}}" onclick="preview(this,{{nivel}})">
       <td class="nombre" title="{{nombre}}"><i class="{{extension}}" style="margin-right:5px;"></i>{{nombre}}</td>
@@ -75,9 +82,10 @@
       <td class="propietario">{{propietario}}</td>
     </tr>
     {{/each}}
+    {{else}}<br>No hay archivos disponibles{{/if}}
     </tbody>
 </table>
-{{else}}<br>No hay archivos disponibles{{/if}}
+
 </div>
 
 
@@ -102,7 +110,7 @@
       <li id='fechaPrev'></li><br>
       <li style="color:dimgrey;">Autor:</li>
       <li id='autorPrev'></li><br>
-      <li style="color:dimgrey;">Nivel:</li>
+      <li style="color:dimgrey;">Nivel del archivo:</li>
       <li id='nivelPrev'></li><br>
       <li><button class="btn1">Descargar</button></li><br>
       <li><button class="btn1" onclick="window.location='/visualizar';">Visualizar</button></li><br>
@@ -111,106 +119,22 @@
 </aside>
   
 
-<script>
-  fechas = Array.from(document.getElementsByClassName('fecha'));
-  fechas.forEach(fecha =>{
-      var d = new Date(parseInt(fecha.textContent));
-      d = d.toISOString().replace('T',' &nbsp ').replace('Z',' ').replaceAll('-','/').substring(0,25);
-      fecha.innerHTML = d;
-  });
+<script type="text/javascript" src="js/fileTableFormat.js"></script>
 
-  iconos = Array.from(document.getElementsByTagName('i'));
-  iconos.forEach(icono =>{
-      var tipo = getType(icono.className);
-      icono.className = 'fa fa-file' + tipo[0]  + '-o';
-      icono.style.color = tipo[1];
-  })
-
-  pesos = Array.from(document.getElementsByClassName('tamano'));
-  pesos.forEach(peso=>{
-      var p = formatBytes(parseInt(peso.textContent));
-      peso.innerHTML = p;
-  })
-
-  const contenido = document.getElementById('contenido');
-  const lateral = document.getElementById('lateral');
-  const iconoPrev = document.getElementById('file-icon');
-  const nombrePrev = document.getElementById('nombrePrev');
-  const tipoPrev = document.getElementById('tipoPrev');
-  const tamanoPrev = document.getElementById('tamanoPrev');
-  const fechaPrev = document.getElementById('fechaPrev');
-  const autorPrev = document.getElementById('autorPrev');
-  const nivelPrev = document.getElementById('nivelPrev');
-
-  function preview(e, nivel){
-      var icono = e.getElementsByTagName('i')[0].className;
-      var color = e.getElementsByTagName('i')[0].style.color;
-      var nombre = e.getElementsByClassName('nombre')[0].textContent;
-      var autor = e.getElementsByClassName('propietario')[0].textContent;
-      var tamano = e.getElementsByClassName('tamano')[0].textContent;
-      var fecha = e.getElementsByClassName('fecha')[0].textContent;
-      iconoPrev.className = icono;
-      iconoPrev.style.color = color;
-      nombrePrev.innerHTML = nombre;
-      tipoPrev.innerHTML = e.className.substring(0,e.className.indexOf(' ')).toUpperCase();
-      tamanoPrev.innerHTML = tamano;
-      fechaPrev.innerHTML = fecha;
-      autorPrev.innerHTML = autor; 
-      nivelPrev.innerHTML = nivel;
-      if (lateral.style.visibility == 'hidden'){
-        lateral.style.visibility = 'initial';
-        lateral.style.position = 'initial';
-        contenido.style.width = '70%';
-      }
-  }
-
-  function hidePreview(){
-      if (lateral.style.visibility == 'initial'){
-        contenido.style.width = '100%';
-        setTimeout(function(){
-        lateral.style.visibility = 'hidden';
-        lateral.style.position = 'absolute';
-        }, 400);
-      }
-  }
-
-  function getType(ext){ 
-    ext = ext.toLowerCase(); 
-    if (ext == 'pdf')
-      return ['-pdf','orangered'];
-    else if (ext.match(/(txt|ini|md)$/i))
-      return ['-text','black'];
-    else if (ext.match(/(doc|docx)$/i))
-      return ['-word','dodgerblue'];
-    else if (ext.match(/(xls|xlsx)$/i))
-      return ['-excel','forestgreen'];
-    else if (ext.match(/(zip|rar|tar|gzip|gz|7z)$/i))
-      return ['-zip', 'gray'];
-    else if (ext.match(/(jpg|jpeg|png)$/i))
-      return ['-image','olive'];
-    else if (ext.match(/(ppt|pptx)$/i))
-      return ['-powerpoint','tomato'];
-    else if (ext.match(/(mp3|wav|mp2|m4a|aac)$/i))
-      return ['-audio','indigo'];
-    else if(ext.match(/(avi|mpg|mkv|mov|mp4|3gp|webm|wmv)$/i))
-      return ['-video','mediumpurple'];
-    else if(ext.match(/(php|js|css|htm|html)$/i))
-      return ['-code','goldenrod'];
-    else
-      return ['','black'];
-
-  }
-
-  function formatBytes(bytes, decimals = 1) {
-    if (bytes === 0) return '0 B';
-    /*return Math.floor(bytes/1024);*/  
-    const k = 1024;
-    const dm = decimals < 0 ? 0 : decimals;
-    const sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return  parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
-}
-
+<script> 
+  var table;
+      window.history.pushState("", "", '/');
+      fileTableFormat();
+      $(document).ready( function () {
+        table = $('#tabla_archivos').DataTable({
+          "bPaginate": false,
+          columnDefs: [{ type: 'file-size', targets: 2 }],
+          order: [0, 'desc'],
+          language: {
+            'search': 'Filtrar: ',
+            'info': '',
+            'lengthMenu': 'Mostrar _MENU_ resultados',
+          }
+        });
+     });
 </script>
-
-

@@ -54,6 +54,9 @@ router.get('/subir-archivo', (req,res) => {if(auth(req,res)) res.render('subirAr
 
 router.post('/upload', fileController.subir_archivo);
 
+router.post('/search-file', fileController.buscar_archivo);
+
+router.get('/prueba', (req,res) => {res.render('prueba')});
 
 
 function auth(req,res){
@@ -69,7 +72,7 @@ function auth(req,res){
 
 function notLogged(req,res){
     if (req.session.usuario){
-        if(req.session.rol != 'admin')
+        if(req.session.rol != 4)
             res.redirect('/index');
         else
             res.redirect('/usercrud');
