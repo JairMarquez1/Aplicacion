@@ -52,12 +52,14 @@ li{
     font-family: 'Inter', sans-serif;
     border: 0;
     border-radius: 0;
+    background-color: lightgray;
 }
 
 .btn2{
     background-color: #8EEC92;
     border: none;
     padding: 10px 15px;
+    border-radius: 2px;
 }
 
 .btn1:hover, .btn2:hover, #logout:hover{
@@ -117,4 +119,9 @@ li{
     header{
         height: 90px;
     }
+}
+
+button{
+    border: none;
+    background: transparent;
 }

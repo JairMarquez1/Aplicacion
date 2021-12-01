@@ -13,6 +13,7 @@ async function cargar_lista(req, res){
     if (datos == null){
         datos = await fileM.findByLevel(req.session.rol, 15);
         datos = datos.concat(await fileM.findByUser(req.session.usuario,10));
+        await obtenerUrls();
         dato = datos.filter((item, pos) => datos.indexOf(item) === pos)
     }
 
@@ -70,6 +71,8 @@ async function buscar_archivo(req,res){
     const { string_search, tipo_busqueda } = obj;
     if (tipo_busqueda == 0){
         datos = await fileM.findFileBySubstring(string_search,req.session.usuario,req.session.rol);
+        direcciones = datos.map(function(doc){return doc.ubicacion});
+        await obtenerUrls();
         res.render('index', {
             archivos: datos
         });
@@ -87,15 +90,20 @@ async function buscar_archivo(req,res){
 
 async function busquedaContenido(req,res){
     datos = await fileM.findByExtension(req.session.usuario,req.session.rol, extensionesBPC);
-        direcciones = datos.map(function(doc){return doc.ubicacion});
-        for (var i = 0; i < direcciones.length; i++){
-            var url = await bucket.file(direcciones[i]).getSignedUrl({
-                action: 'read',
-                expires: '01-01-2022'
-              });
-            datos[i].ubicacion = url[0];
-        }
+        await obtenerUrls();
         console.log(datos);
+}
+
+
+async function obtenerUrls(){
+    direcciones = datos.map(function(doc){return doc.ubicacion});
+    for (var i = 0; i < direcciones.length; i++){
+        var url = await bucket.file(direcciones[i]).getSignedUrl({
+            action: 'read',
+            expires: '01-01-2022'
+          });
+        datos[i].ubicacion = url[0];
+    }
 }
 
 

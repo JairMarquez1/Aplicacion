@@ -38,24 +38,28 @@ span{
     margin-top: 4px;
 }
 
-#login_body li{
+#registro_body li{
     margin-top: 8px;
     font-size: 16px;
 }
 
-#btn_iniciar{
+#btn_confirmar{
     font-size: 16px;
     font-weight: 600;
     margin-top: 16px
 }
 
-#usuario, #contrasena, #btn_iniciar{
+#input_nombre, #input_contrasena, #input_email, #btn_confirmar{
     width: 300px;
 }
 
 #error{
-    font-size: 16px;
+    font-size: 18px;
     color: red;
+}
+
+#input_nivel{
+    text-align: center;
 }
 
 @media (max-width:600px){
@@ -63,10 +67,10 @@ span{
         font-size: 14px;
         padding: 5px;
     }
-    #login_body li{
+    #register_body li{
         margin-top: 4px;
     }
-    #usuario, #contrasena, #btn_iniciar{
+    #input_nombre, #input_contrasena, #input_email, #btn_confirmar{
         width: 70%;
     }
     html{
@@ -76,7 +80,7 @@ span{
 }
 
 @media (max-height:800px){
-    .btn2, #btn_iniciar, li, span, a{
+    .btn2, #btn_confirmar, li, span, a{
         font-size: 14px;
         padding: 5px;
         margin-top: 0;

@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="styles/index2.css">
+<link rel="stylesheet" href="styles/viewFile.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="styles/dataTables/datatables.min.css"/>
 
@@ -7,6 +8,7 @@
 <script type="text/javascript" src="js/forms.js"></script>
 <script type="text/javascript" src="js/docToText.js"></script>
 <script type="text/javascript" src="js/searchContent.js"></script>
+<script type="text/javascript" src="js/downloadFile.js"></script>
 
 <script> 
   function buscarAjax(){
@@ -30,6 +32,11 @@
       http.setRequestHeader('Content-Type', 'application/json');
       http.send(data);
   }
+</script>
+
+
+<script>
+    
 </script>
 
 
@@ -77,7 +84,7 @@
       <td class="nombre" title="{{nombre}}"><i class="{{extension}}" style="margin-right:5px;"></i>{{nombre}}</td>
       <td class="fecha" title="{{fecha}}">{{fecha}}</td>
       <td class="tamano">{{tamano}}</td>
-      <td class="propietario">{{propietario}}</td>
+      <td class="propietario">{{propietario}}<input type="hidden" value="{{ubicacion}}"></td>
     </tr>
     {{/each}}
     {{else}}<br>No hay archivos disponibles{{/if}}
@@ -85,6 +92,8 @@
 </table>
 
 </div>
+
+
 
 <footer>
         <button id="btn_subir" class="btn1" onclick="window.location='/subir-archivo';">Subir archivo <i class="fa fa-upload"></i></button>
@@ -108,14 +117,12 @@
       <li id='autorPrev'></li><br>
       <li style="color:dimgrey;">Nivel del archivo:</li>
       <li id='nivelPrev'></li><br>
-      <li><button class="btn1">Descargar <i class="fa fa-download"></i></button></li><br>
-      <li><button class="btn1" onclick="window.location='/visualizar';">Visualizar <i class="fa fa-eye"></i></button></li><br>
+      <li><button class="btn1" id="descargaPrev">Descargar <i class="fa fa-download"></i></button></li><br>
+      <li><button class="btn1" id="showPrev" onclick="">Visualizar <i class="fa fa-eye"></i></button></li><br>
     </table>
   </div>
 </aside>
 
-<!--<dialog open style="margin: auto; width= 80%">
-</dialog>-->
 
 <script type="text/javascript" src="js/fileTableFormat.js"></script>
 <script> 

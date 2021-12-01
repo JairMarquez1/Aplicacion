@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="styles/usercrud.css">
+<link rel="stylesheet" href="styles/usercrud2.css">
 <script type="text/javascript" src="js/forms.js"></script>
 
 <script>
@@ -71,24 +71,20 @@
 <div id="contenido">
     
 <!--Menú para buscar usuarios-->
-<table id="tabla_buscar_usuarios" width="50%">
+<table id="tabla_busqueda" width="50%">
         <td> <input id="input_busqueda" type="text" placeholder="Buscar usuario" name="string_search" autocomplete="on" onkeyup="/*buscarAjax()*/"> </td>
         <td> <button onclick="buscarAjax()"><ion-icon id="search_icon" name="search"></ion-icon></ion-icon> </button></td>
 </table>
 
-<!--Cabecera de la tabla usuarios-->
-<table id="tabla_usuarios_header">
+<!--Se enlistan los usuarios en una tabla con scroll-->
+<div id="table-scroll">
+<table id="tabla_usuarios" width="100%">
     <tr>
       <th class="td-user">Usuario</th>
       <th class="td-correo">Correo</th>
       <th class="td-tipo">Nivel</th>
       <th class="td-acc">Acciones</th>
   </tr>
-</table>
-
-<!--Se enlistan los usuarios en una tabla con scroll-->
-<div id="table-scroll">
-<table id="tabla_usuarios" width="100%">
     {{#if usuarios}}{{else}}<tr><td>No se encontraron coincidencias</td></tr>{{/if}}
     {{#each usuarios}}
     <tr id="{{usuario}}" {{#if estado}}class="tr-usuario-on"{{else}}class="tr-usuario-off"{{/if}}>

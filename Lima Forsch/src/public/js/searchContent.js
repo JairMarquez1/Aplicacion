@@ -52,7 +52,7 @@ async function searchContent(url,ext,str,doc){
       <td class="nombre" title="${doc.nombre}"><i class="${doc.extension}" style="margin-right:5px;"></i>${doc.nombre}</td>
       <td class="fecha" title="${doc.fecha}">${doc.fecha}</td>
       <td class="tamano">${doc.tamano}</td>
-      <td class="propietario">${doc.propietario}</td>
+      <td class="propietario">${doc.propietario}<input type="hidden" value="${doc.ubicacion}"></td>
     </tr>`;
   }
 }
@@ -69,7 +69,7 @@ async function searchContentTxt(url,str,doc){
           <td class="nombre" title="${doc.nombre}"><i class="${doc.extension}" style="margin-right:5px;"></i>${doc.nombre}</td>
           <td class="fecha" title="${doc.fecha}">${doc.fecha}</td>
           <td class="tamano">${doc.tamano}</td>
-          <td class="propietario">${doc.propietario}</td>
+          <td class="propietario">${doc.propietario}<input type="hidden" value="${doc.ubicacion}"></td>
         </tr>`;
       }
   });

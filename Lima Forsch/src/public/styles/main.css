@@ -99,3 +99,8 @@ li{
         height: 60px;
     }
 }
+
+button{
+    border: none;
+    background: transparent;
+}

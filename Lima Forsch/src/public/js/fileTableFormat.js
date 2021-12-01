@@ -7,6 +7,8 @@ var tamanoPrev = document.getElementById('tamanoPrev');
 var fechaPrev = document.getElementById('fechaPrev');
 var autorPrev = document.getElementById('autorPrev');
 var nivelPrev = document.getElementById('nivelPrev');
+const extensionesPrev = ['pdf', 'txt', 'js', 'json', 'mp4', 'jpg', 'png', 'jpeg', 'html', 'md', 'log', 'gif', 'wav', 'mp3'];
+const extensionesPrev2 = ['docx', 'doc', 'xls', 'xlsx'];
 
 function fileTableFormat(){
     fechas = Array.from(document.getElementsByClassName('fecha'));
@@ -31,15 +33,17 @@ function fileTableFormat(){
 }
 
 function preview(e, nivel){
-     contenido = document.getElementById('contenido');
-     lateral = document.getElementById('lateral');
-     iconoPrev = document.getElementById('file-icon');
-     nombrePrev = document.getElementById('nombrePrev');
-     tipoPrev = document.getElementById('tipoPrev');
-     tamanoPrev = document.getElementById('tamanoPrev');
-     fechaPrev = document.getElementById('fechaPrev');
-     autorPrev = document.getElementById('autorPrev');
-     nivelPrev = document.getElementById('nivelPrev');
+    contenido = document.getElementById('contenido');
+    lateral = document.getElementById('lateral');
+    iconoPrev = document.getElementById('file-icon');
+    nombrePrev = document.getElementById('nombrePrev');
+    tipoPrev = document.getElementById('tipoPrev');
+    tamanoPrev = document.getElementById('tamanoPrev');
+    fechaPrev = document.getElementById('fechaPrev');
+    autorPrev = document.getElementById('autorPrev');
+    nivelPrev = document.getElementById('nivelPrev');
+    descargaPrev = document.getElementById('descargaPrev');
+    showPrev = document.getElementById('showPrev');
 
     var icono = e.getElementsByTagName('i')[0].className;
     var color = e.getElementsByTagName('i')[0].style.color;
@@ -47,6 +51,8 @@ function preview(e, nivel){
     var autor = e.getElementsByClassName('propietario')[0].textContent;
     var tamano = e.getElementsByClassName('tamano')[0].textContent;
     var fecha = e.getElementsByClassName('fecha')[0].textContent;
+    var url = e.getElementsByClassName('propietario')[0].getElementsByTagName('input')[0].value;
+
     iconoPrev.className = icono;
     iconoPrev.style.color = color;
     nombrePrev.innerHTML = nombre;
@@ -55,6 +61,11 @@ function preview(e, nivel){
     fechaPrev.innerHTML = fecha;
     autorPrev.innerHTML = autor; 
     nivelPrev.innerHTML = nivel;
+    str = 'downloadResource("' + url +'","' + nombre  + '")';
+    descargaPrev.setAttribute('onclick', str);
+    str = 'showView("' + e.className.toUpperCase() +'","' + url  + '")';
+    showPrev.setAttribute('onclick', str);
+
     if (lateral.style.visibility == 'hidden'){
       lateral.style.visibility = 'initial';
       lateral.style.position = 'initial';
@@ -72,6 +83,46 @@ function hidePreview(){
     }
 }
 
+function hideView(){
+  var view = document.getElementById('view');
+  var blur = document.getElementById('blur');
+
+  view.remove();
+  blur.remove();
+}
+
+async function showView(ext,url){
+  ext = ext.toLowerCase();
+  if (extensionesPrev.includes(ext)){
+    document.getElementsByTagName('header')[0].innerHTML += `
+      <div id="blur" onclick="hideView()">
+      _
+      </div>
+      <dialog id="view" open>
+        <h3><span onclick="hideView()"><ion-icon name="close-outline"></ion-icon></span></h3>
+        <iframe class='viewBody' src="${url}" ></iframe>
+      </dialog>
+    `;
+  }
+  else if (extensionesPrev2.includes(ext)){
+    var x = await urlToText(url,ext);
+    x = x.replaceAll(/(?:\r\n|\r|\n)/g, '<br>');
+    document.getElementsByTagName('header')[0].innerHTML += `
+      <div id="blur" onclick="hideView()">
+      _
+      </div>
+      <dialog id="view" style:"font-size:" open>
+        <h3><span onclick="hideView()"><ion-icon name="close-outline"></ion-icon></span></h3>
+        <h5><ion-icon name="alert-circle-outline"></ion-icon> Los archivos ${ext} se visualizan parcialmente <ion-icon name="alert-circle-outline"></ion-icon></h5>
+        <div class='viewBody' style="padding: 2% 5%">${x}</div>
+      </dialog>
+    `;
+  }
+  else{
+    alert('Visualización no dispoible para archivos ' + ext);
+  }
+}
+
 function getType(ext){ 
   ext = ext.toLowerCase(); 
   if (ext == 'pdf')
@@ -84,7 +135,7 @@ function getType(ext){
     return ['-excel','forestgreen'];
   else if (ext.match(/(zip|rar|tar|gzip|gz|7z)$/i))
     return ['-zip', 'gray'];
-  else if (ext.match(/(jpg|jpeg|png)$/i))
+  else if (ext.match(/(jpg|jpeg|png|gif)$/i))
     return ['-image','olive'];
   else if (ext.match(/(ppt|pptx)$/i))
     return ['-powerpoint','tomato'];
@@ -108,6 +159,8 @@ function formatBytes(bytes, decimals = 1) {
   const i = Math.floor(Math.log(bytes) / Math.log(k));
   return  parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
 }
+
+
 
 
 //window.onload = fileTableFormat;
