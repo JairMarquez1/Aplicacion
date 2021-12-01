@@ -123,6 +123,7 @@ async function modificar_usuario(req, res) {
     if (obj.pass_modify == '1') {
         newPass = 1234;
         nuevosDatos.pass = newPass;
+        /** */
     }
     //Se actualiza el usuario en la base de datos
     user.updateUser(nuevosDatos, variables.modifyUser);

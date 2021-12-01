@@ -16,7 +16,7 @@ function fileTableFormat(){
         fecha.innerHTML = d;
     });
 
-    iconos = Array.from(document.getElementsByTagName('i'));
+    iconos = Array.from(document.getElementById('tabla_archivos').getElementsByTagName('i'));
     iconos.forEach(icono =>{
         var tipo = getType(icono.className);
         icono.className = 'fa fa-file' + tipo[0]  + '-o';

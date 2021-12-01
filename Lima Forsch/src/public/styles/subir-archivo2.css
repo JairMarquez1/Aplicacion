@@ -1,0 +1,139 @@
+
+body{
+    background: white;
+}
+
+.div_contenedor{
+    background: white;
+    align-items:center;
+    justify-content: center;
+    border-radius: 0 0 10px 10px;
+    border: 1px solid lightgray;
+    border-top: none;
+    width: 100%;
+    
+}
+
+.columna1{
+    float: left;
+    height: 90%;
+    display: flex;     
+    align-items: center;
+    justify-content: center;
+    padding-left: 6vw;
+}
+.columna2{
+    text-align: center;
+    height: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.drop-area{
+    background: white;
+    border: 5px dashed rgb(50, 189, 37);
+    border-radius: 10px;
+    width: 60%;       
+    height: 300px;
+    margin: 0px auto;
+    transition: background-color ease-in 0.2s;
+    padding-bottom: 10px;
+}
+
+.drop-area.active{
+    background-color: rgb(162, 235, 162);
+    color: black;
+    border: 5px dashed rgb(5, 90, 5);
+}
+
+.drop-area span{
+    font-size: 25px;
+    color: #000;
+}
+
+.drop-area button{
+    padding: 10px 25px;
+    font-size: 16px;
+    border: 0;
+    outline: none;
+    background-color: #D5FAE8;
+    color: black;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.2s ease-in-out;
+}
+
+#btn1:hover{
+    background-color: #c8ecdb;
+}
+
+.file-container{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border: solid 1px #ddd; 
+}
+
+#preview{
+    margin-top: 10px;
+
+}
+
+#div-btn2{
+    width: 100%;       
+    text-align: center;
+    margin-bottom: 10px;
+    
+}
+
+#btn2 {
+    border: 2px black solid;
+    padding: 10px;
+    font-size: 15px;
+    outline: none;
+    background-color: rgb(50, 189, 37);
+    color: white;
+    cursor: pointer;
+    width: 150px;
+}
+
+@media (max-width:990px){
+    h3, h2, #btn1, #btn2, .drop-area span{
+        font-size: 2vw;
+        padding: 3px;
+    }
+    #nube{
+        width: 25vw;
+    }
+    .drop-area , .drop-area.active{
+        width: 85vw;
+        height: 30vw;
+        border: 3px dashed rgb(50, 189, 37);
+    }
+    .columna2{
+        padding-top: 1vw;
+    }
+}
+
+
+#progress_bar {
+    font-size: 14px;
+    clear: both;
+    opacity: 0;
+    transition: all 1s ease-in-out;
+}
+#progress_bar.loading {
+    opacity: 1;
+}
+
+.percent {
+    border-radius: 5px 5px 0px 0px;
+    background-color: #99ffaf;
+    height: auto;
+    width: 0;
+    text-align: center;
+}

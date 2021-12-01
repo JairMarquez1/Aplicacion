@@ -95,6 +95,7 @@ async function busquedaContenido(req,res){
               });
             datos[i].ubicacion = url[0];
         }
+        console.log(datos);
 }
 
 

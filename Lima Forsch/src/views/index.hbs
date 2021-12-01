@@ -1,14 +1,12 @@
-<link rel="stylesheet" href="styles/index.css">
+<link rel="stylesheet" href="styles/index2.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="styles/dataTables/datatables.min.css"/>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<link rel="stylesheet" type="text/css" href="styles/dataTables/datatables.min.css"/>
 <script type="text/javascript" src="styles/dataTables/datatables.min.js"></script>
 <script type="text/javascript" src="js/forms.js"></script>
 <script type="text/javascript" src="js/docToText.js"></script>
 <script type="text/javascript" src="js/searchContent.js"></script>
-
-
 
 <script> 
   function buscarAjax(){
@@ -88,16 +86,14 @@
 
 </div>
 
-
 <footer>
-        <button id="btn_subir" class="btn1" onclick="window.location='/subir-archivo';">Subir archivo</button>
+        <button id="btn_subir" class="btn1" onclick="window.location='/subir-archivo';">Subir archivo <i class="fa fa-upload"></i></button>
 </footer>
 
 </div>
-
 <aside id="lateral" style="visibility: hidden;">
   <div style="margin: 10px; width:100%"><br>
-    <div style="text-align:start;"><ion-icon name="arrow-forward-outline" onclick="hidePreview()"></ion-icon></div><br>
+    <div style="text-align:start;"><ion-icon name="arrow-forward-outline" onclick="hidePreview()"></ion-icon></div>
     <i id="file-icon" class="fa fa-file"></i><br><br>
     <table>
       <li style="color:dimgrey;">Nombre del archivo:</li>
@@ -112,15 +108,16 @@
       <li id='autorPrev'></li><br>
       <li style="color:dimgrey;">Nivel del archivo:</li>
       <li id='nivelPrev'></li><br>
-      <li><button class="btn1">Descargar</button></li><br>
-      <li><button class="btn1" onclick="window.location='/visualizar';">Visualizar</button></li><br>
+      <li><button class="btn1">Descargar <i class="fa fa-download"></i></button></li><br>
+      <li><button class="btn1" onclick="window.location='/visualizar';">Visualizar <i class="fa fa-eye"></i></button></li><br>
     </table>
   </div>
 </aside>
-  
+
+<!--<dialog open style="margin: auto; width= 80%">
+</dialog>-->
 
 <script type="text/javascript" src="js/fileTableFormat.js"></script>
-
 <script> 
   var table;
       window.history.pushState("", "", '/');

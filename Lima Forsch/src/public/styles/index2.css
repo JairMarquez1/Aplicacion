@@ -1,0 +1,191 @@
+body{
+    background: white;
+}
+
+#contenido{
+    width: 100%;
+    float: left;
+    transition: all 0.5s ease-in-out;
+    border-radius: 0 0 0 10px;
+    border: 1px solid lightgray;
+    border-top: none;
+    background: white;
+}
+
+
+/*-----------Barra busqueda----------*/
+
+#tabla_busqueda{
+    padding-left: 10px;
+    height: 44px;
+}
+
+#input_busqueda{
+    padding: 2% 2%;
+    border: none;
+    border-bottom: 2px solid gray;
+    width: 95%;
+    outline: none;
+    font-size: 18px;
+    cursor: text;
+}
+
+#input_busqueda::placeholder{
+    color:rgb(128, 128, 128);
+    transition: all 0.3s ease-out;
+}
+
+#input_busqueda:focus{
+    border-bottom: 2px solid #13c52e;
+  }
+
+#input_busqueda:focus::placeholder{
+    color:rgb(128, 128, 128,0);
+    transition: all 0.3s ease-out;
+}
+
+#search_button{
+    border: none;
+    background: transparent;
+}
+
+#search_icon{
+    font-size: 28px;
+    color: gray;
+}
+
+#search_icon:hover{
+    filter: drop-shadow(1px 1px 5px #8EEC92);
+    color: #13c52e;
+    cursor: pointer;
+}
+
+.radioBusquedaSpan{
+    font-size: 14px;
+    font-weight: 600;
+    color: rgb(71, 71, 71);
+}
+
+/*-----------Tabla archivos----------*/
+
+#tabla_archivos_header{
+    height: 30px;
+    border-spacing:0 0px; 
+    width: 100%; 
+}
+
+#tabla_archivos_header th{
+    text-align: start;
+    background-color: white;
+    padding: 5px 5px;
+    width: 23vw;
+}
+
+#table-scroll {
+    padding: 0 10px 0px 10px;
+    height: 60vh;
+    overflow:auto;  
+}
+
+#tabla_archivos{
+    border-collapse:separate;
+    border-spacing:0px 0px;  
+    table-layout: fixed; 
+    white-space: nowrap;
+}
+
+#tabla_archivos td{
+    padding: 5px 5px;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    border-top: 1px solid rgb(173, 173, 173);
+}
+
+#tabla_archivos tr:hover{
+    filter: brightness(0.95);
+    cursor: pointer;
+    transition: all 0.1s ease-out;
+}
+
+.fecha, .tamano{
+    color: gray;
+}
+
+#tabla_archivos tr:nth-child(even) {/* background: #E5F6EC */} /*#EFEFEF*/
+#tabla_archivos tr:nth-child(odd) {/* background: #E5F6EC */}
+
+/*----------Barra lateral--------*/
+
+#lateral{
+    border-right: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+    height: calc(77vh + 45px);
+    /* background-color: #C4C4C4; */
+    border-radius: 0 0 10px 0;
+    display: flex;
+    text-align: center;
+    overflow-x: hidden;
+    position: absolute;
+    visibility: hidden;
+}
+
+/*----------Footer----------*/
+
+footer{
+    border-top: 1px solid lightgray;
+    border-radius: 0 0 0 10px;
+    height: 17vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.001s ease-in-out;
+}
+
+#btn_subir{
+    font-size: 16px;
+}
+
+#file-icon{
+    font-size: 10vw;
+}
+
+
+@media (max-width:990px){
+    #tabla_archivos, #tabla_archivos_header, #input_busqueda, #search_icon, .radioBusquedaSpan, #lateral, .fa{
+        font-size: calc(0.7vw + 0.7vh);
+    }
+
+    #lateral{
+        align-items: start;
+    }
+}
+
+@media (max-height:800px){
+    #table-scroll{
+        height: 400px !important;
+    }
+
+    #lateral{
+        height: calc(17vh + 445px);
+        font-size: calc(0.7vw + 0.7vh);
+    }
+
+}
+
+@media (max-width:990px){
+    .dataTables_length, .dataTables_filter{
+        width: auto;
+    }
+    .dataTables_length *, .dataTables_filter *, .dataTables_paginate *, .dataTables_info, .dataTables_paginate{
+        font-size: 1.6vw;
+        padding: 1px !important;
+        height: auto;
+        margin: 0 !important;
+    }
+}
+
+
+th{
+    padding: 8px 20px;
+    text-align: left;
+}
