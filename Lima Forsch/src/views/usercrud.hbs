@@ -88,7 +88,7 @@
     {{#if usuarios}}{{else}}<tr><td>No se encontraron coincidencias</td></tr>{{/if}}
     {{#each usuarios}}
     <tr id="{{usuario}}" {{#if estado}}class="tr-usuario-on"{{else}}class="tr-usuario-off"{{/if}}>
-        <td>{{usuario}}</td>
+        <td><i class="fa fa-user"> &nbsp</i>{{usuario}}</td>
         <td>{{correo}}</td>
         <td class="td-tipo">{{nivel}}</td>
         <td class="td-acc">
