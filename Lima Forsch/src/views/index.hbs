@@ -9,6 +9,9 @@
 <script type="text/javascript" src="js/docToText.js"></script>
 <script type="text/javascript" src="js/searchContent.js"></script>
 <script type="text/javascript" src="js/downloadFile.js"></script>
+<script type="text/javascript" src="js/fileStats.js"></script>
+<!--<script type="text/javascript" src="js/chart.js"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js" integrity="sha512-GMGzUEevhWh8Tc/njS0bDpwgxdCJLQBWG3Z2Ct+JGOpVnEmjvNx6ts4v6A2XJf1HOrtOsfhv3hBKpK9kE5z8AQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script> 
   function buscarAjax(){
@@ -34,10 +37,34 @@
   }
 </script>
 
-
 <script>
-    
+  function imprimirVentana(f){
+    document.getElementsByTagName('header')[0].innerHTML += `
+      <div id="blur" onclick="hideView()">_</div>
+      <dialog id="view" open>
+        <h3><span onclick="hideView()"><ion-icon name="close-outline"></ion-icon></span></h3>
+        <div id='viewAux'>
+          <div class='viewBody'" >
+          {{>estadisticas 
+              nombre='${f.nombre}'
+              ext='${f.ext}'
+              parrafos='${f.parrafos}'
+              lineas='${f.lineas}'
+              palabras='${f.palabras}'
+              palabrasUnicas='${f.palabrasUnicas}'
+              caracteres='${f.caracteres}'
+              frecuencias='${f.frecuencias}'
+              masFrecuentes='${f.masFrecuentes}'
+          }}
+          </div>
+        </div>
+      </dialog>
+  `;
+  }
+
 </script>
+
+
 
 
 <div id="contenido">
@@ -84,7 +111,7 @@
       <td class="nombre" title="{{nombre}}"><i class="{{extension}}" style="margin-right:5px;"></i>{{nombre}}</td>
       <td class="fecha" title="{{fecha}}">{{fecha}}</td>
       <td class="tamano">{{tamano}}</td>
-      <td class="propietario">{{propietario}}<input type="hidden" value="{{ubicacion}}"></td>
+      <td class="propietario"><span>{{propietario}}</span><input type="hidden" value="{{ubicacion}}"></td>
     </tr>
     {{/each}}
     {{else}}<br>No hay archivos disponibles{{/if}}
@@ -119,12 +146,17 @@
       <li id='nivelPrev'></li><br>
       <li><button class="btn1" id="descargaPrev">Descargar <i class="fa fa-download"></i></button></li><br>
       <li><button class="btn1" id="showPrev" onclick="">Visualizar <i class="fa fa-eye"></i></button></li><br>
+      <li><button class="btn1" id="showStats" onclick="">Analizar <i class="fa fa-bar-chart"></i></button></li><br>
     </table>
   </div>
 </aside>
 
 
 <script type="text/javascript" src="js/fileTableFormat.js"></script>
+
+
+<!--script-->
+
 <script> 
   var table;
       window.history.pushState("", "", '/');

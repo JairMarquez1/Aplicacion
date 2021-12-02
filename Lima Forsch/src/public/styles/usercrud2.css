@@ -59,7 +59,7 @@ body{
 
 #table-scroll {
     padding: 0 10px 0px 10px;
-    height: 60vh;
+    height: 40vh; /*60vh*/
     overflow:auto; 
 }
 
@@ -134,8 +134,8 @@ th{
 
 
 
-#tabla_usuarios tr:nth-child(even) {background: #E5F6EC/*#EFEFEF*/}
-#tabla_usuarios tr:nth-child(odd) {background: #E5F6EC}
+#tabla_usuarios tr:nth-child(even) {background: white/*#EFEFEF*/}
+#tabla_usuarios tr:nth-child(odd) {background: white/*#E5F6EC*/}
 
 /*----------Footer----------*/
 

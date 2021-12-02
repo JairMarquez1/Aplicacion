@@ -6,7 +6,7 @@ fileM = new FileModel();
 userM = new UserModel();
 
 datos = null;
-extensionesBPC = ['pdf','txt','doc','docx','xlsx'];
+extensionesBPC = ['pdf','txt','doc','docx','xlsx','js'];
 
 async function cargar_lista(req, res){
     console.log(req.session);

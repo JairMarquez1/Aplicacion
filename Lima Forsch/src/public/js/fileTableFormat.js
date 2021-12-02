@@ -9,6 +9,7 @@ var autorPrev = document.getElementById('autorPrev');
 var nivelPrev = document.getElementById('nivelPrev');
 const extensionesPrev = ['pdf', 'txt', 'js', 'json', 'mp4', 'jpg', 'png', 'jpeg', 'html', 'md', 'log', 'gif', 'wav', 'mp3'];
 const extensionesPrev2 = ['docx', 'doc', 'xls', 'xlsx'];
+const extensionesBPC = ['pdf','txt','doc','docx','xlsx','js'];
 
 function fileTableFormat(){
     fechas = Array.from(document.getElementsByClassName('fecha'));
@@ -44,6 +45,7 @@ function preview(e, nivel){
     nivelPrev = document.getElementById('nivelPrev');
     descargaPrev = document.getElementById('descargaPrev');
     showPrev = document.getElementById('showPrev');
+    showStatsf = document.getElementById('showStats')
 
     var icono = e.getElementsByTagName('i')[0].className;
     var color = e.getElementsByTagName('i')[0].style.color;
@@ -65,6 +67,16 @@ function preview(e, nivel){
     descargaPrev.setAttribute('onclick', str);
     str = 'showView("' + e.className.toUpperCase() +'","' + url  + '")';
     showPrev.setAttribute('onclick', str);
+    str = 'showStats("' + e.className.toUpperCase() +'","' + nombre + '","' + url  + '")';
+
+    if (extensionesBPC.includes(e.className)){
+      showStatsf.setAttribute('onclick', str);
+      showStatsf.style.visibility = 'initial';
+    }
+    else{
+      showStatsf.setAttribute('onclick', '');
+      showStatsf.style.visibility = 'hidden';
+    }
 
     if (lateral.style.visibility == 'hidden'){
       lateral.style.visibility = 'initial';
@@ -100,7 +112,9 @@ async function showView(ext,url){
       </div>
       <dialog id="view" open>
         <h3><span onclick="hideView()"><ion-icon name="close-outline"></ion-icon></span></h3>
+        <div id='viewAux'>
         <iframe class='viewBody' src="${url}" ></iframe>
+        </div>
       </dialog>
     `;
   }
@@ -114,7 +128,9 @@ async function showView(ext,url){
       <dialog id="view" style:"font-size:" open>
         <h3><span onclick="hideView()"><ion-icon name="close-outline"></ion-icon></span></h3>
         <h5><ion-icon name="alert-circle-outline"></ion-icon> Los archivos ${ext} se visualizan parcialmente <ion-icon name="alert-circle-outline"></ion-icon></h5>
+        <div id='viewAux'>
         <div class='viewBody' style="padding: 2% 5%">${x}</div>
+        </div>
       </dialog>
     `;
   }
@@ -159,7 +175,6 @@ function formatBytes(bytes, decimals = 1) {
   const i = Math.floor(Math.log(bytes) / Math.log(k));
   return  parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
 }
-
 
 
 

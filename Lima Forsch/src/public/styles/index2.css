@@ -118,6 +118,10 @@ th{
     visibility: hidden;
 }
 
+#lateral .btn1{
+    width: 60%;
+}
+
 /*----------Footer----------*/
 
 footer{
@@ -135,7 +139,7 @@ footer{
 }
 
 #file-icon{
-    font-size: 10vw;
+    font-size: 9vw;
 }
 
 
@@ -143,9 +147,14 @@ footer{
     #tabla_archivos, #tabla_archivos_header, #input_busqueda, #search_icon, .radioBusquedaSpan, #lateral, .fa{
         font-size: calc(0.7vw + 0.7vh);
     }
-
     #lateral{
         align-items: start;
+    }
+}
+
+@media (max-width:400px){
+    #lateral .btn1{
+        width: 96%;
     }
 }
 
@@ -172,3 +181,4 @@ footer{
         margin: 0 !important;
     }
 }
+

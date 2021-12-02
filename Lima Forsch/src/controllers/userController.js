@@ -91,7 +91,7 @@ async function crear_usuario(req, res) {
     nombre_registroCap = firstCap(nombre_registro);
     //Se crea el objeto con los datos del nuevo usuario
     nuevoUsuario = {
-        usuario: nombre_registroCap,
+        usuario: nombre_registroCap.substring(0,15),
         pass: contrasena_registro,
         correo: email_registro,
         nivel: parseInt(nivel_registro),

@@ -71,7 +71,7 @@ module.exports = class FileModel{
         bucket.file(newPath).createWriteStream().end(buffer);
         //Se crea el registro en la base de datos
         const fileRef = db.collection('archivos');
-        let id = user.usuario + nuevoArchivo.nombre + nuevoArchivo.fecha
+        let id = user.usuario + nuevoArchivo.nombre //+ nuevoArchivo.fecha
         await fileRef.doc(id).set(nuevoArchivo);
     }
 

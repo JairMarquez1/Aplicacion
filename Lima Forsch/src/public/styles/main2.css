@@ -9,6 +9,7 @@
 .darkmode:not(img):not(video):not(i):not(button){ 
     background: white;
     filter: invert(1) hue-rotate(180deg);
+    color: gray;
 }
 
 html{
@@ -63,7 +64,7 @@ li{
 }
 
 .btn1:hover, .btn2:hover, #logout:hover{
-    filter: brightness(0.90);
+    w: brightness(0.90);
     cursor: pointer;
     transition: all 0.2s ease-out;
 }

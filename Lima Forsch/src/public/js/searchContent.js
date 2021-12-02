@@ -26,7 +26,7 @@ async function filtrarPorContenido(obj,string_search){
         var doc = array[i];
         var url = doc.ubicacion ;
         var ext = doc.extension;
-        if (ext != 'txt'){
+        if (ext != 'txt' && ext != 'js'){
           await searchContent(url,ext,string_search,doc);
         }
         else{
