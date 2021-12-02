@@ -56,11 +56,11 @@
             var tr = e.parentNode.parentNode;
             if (tr.className == "tr-usuario-on"){
                 tr.className = "tr-usuario-off";
-                e.textContent = "Habilitar";
+                e.innerHTML = `<i class="fa fa-toggle-off"></i>`;
             }
             else{
                 tr.className = "tr-usuario-on";
-                e.textContent = "Inhabilitar";
+                e.innerHTML = `<i class="fa fa-toggle-on"></i>`;
             }
         }
     }
@@ -94,7 +94,7 @@
         <td class="td-acc">
             <!--<form method="POST">-->
                 <button class="mod-btn" type="submit" name="modifyUser" value="{{usuario}}" onclick="modificarAjax(this)">Modificar</button> &nbsp 
-                <button class="hab-btn" type="submit" name="enableUser" value="{{usuario}}" onclick="cambiarAjax(this)">{{#if estado}}Inhabilitar{{else}}Habilitar{{/if}}</button>
+                <button class="hab-btn" type="submit" name="enableUser" value="{{usuario}}" onclick="cambiarAjax(this)">{{#if estado}}<i class="fa fa-toggle-on"></i>{{else}}<i class="fa fa-toggle-off"></i>{{/if}}</button>
             <!--</form>-->
         </td>
     </tr>
@@ -102,7 +102,6 @@
 
 </table>
 </div>
-
 <footer>
     <div style="width:80vw; margin:auto">
         <!--_________________Mensaje de error______________-->

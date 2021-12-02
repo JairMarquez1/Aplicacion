@@ -118,18 +118,19 @@ th{
 }
 
 .hab-btn{
-    width: 80px;
-    color: white;
+    color: black;
     cursor: pointer;
     border: none;
     border-radius: 3px;
-    background: #9b9b9b;
-    padding: 4px 5px;
+    background: transparent;
+    padding-left: 16px;
 }
 
-.hab-btn:hover{
-    background: #616161;
+.hab-btn i:hover{
+    transform: scale(1.1);
+    /*background: #616161;*/
     transition: all 0.3s ease-out;
+    cursor: pointer;
 }
 
 
@@ -248,7 +249,7 @@ footer{
         font-size: 2vw;
     }
     .hab-btn{
-        width: 5em;
+        /*width: 5em;*/
     }
     #tabla_usuarios{
         padding: 0 0 0 1px;
