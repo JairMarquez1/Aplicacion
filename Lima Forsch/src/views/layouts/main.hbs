@@ -19,10 +19,10 @@
         <img id="logo" src="images/logo_lima.png" onclick="window.location='/';"></img>      
         <div id="aux">
             {{#if session.usuario}}
-            <div id="nombre_usuario">Usuario: {{session.usuario}}<br>Nivel:{{session.rol}}</div>
+            <div style="padding-bottom: 10px; font-size: 70%;" id="nombre_usuario">Usuario: {{session.usuario}}<br>Nivel:{{session.rol}}</div>
             {{/if}}
         <form style="align-self: self-end;" action="/logout" method="POST"> 
-            <button type="submit" id="logout" onclick="window.location='/login';">Cerrar sesión</button>
+            <button style="padding: 6px" type="submit" id="logout" onclick="window.location='/login';">Cerrar sesión</button>
         </form>
         </div>
         
