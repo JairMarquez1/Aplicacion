@@ -2,7 +2,7 @@
   "name": "lima-forsch",
   "version": "1.0.0",
    "engines": {
-    "node": "14.17."
+    "node": "14.17.5"
   },
   "main": "index.js",
   "scripts": {
