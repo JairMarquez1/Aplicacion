@@ -1,0 +1,36 @@
+<link rel="stylesheet" href="styles/login2.css">
+
+<div id="contenido">
+    <!--<div id="iniciar_sesion">-->
+        <div id="login_body">
+            <form name="login-form" action="/iniciar-sesion" method="POST">
+                <ul>
+                    <li>
+                        <span>Usuario</span><br>
+                        <input class="inpt1" id="usuario" type="text" name="usuario" required><br>
+                    </li>
+                    <li>
+                        <span>Contraseña</span><br>
+                        <input class="inpt1" id="contrasena" type="password" name="contrasena" required><br>
+                    </li>
+                    <li>
+                        <button class="btn2" id="btn_iniciar">Iniciar sesión</button>
+                    </li>
+                    <!--<li>
+                        <a href="#">Recuperar contraseña</a>
+                    </li>-->
+                    <br>
+                    <li>
+                        {{#if errorMsg}}
+                            <div id="error">{{errorMsg}}</div>
+                        {{/if}}
+                    </li>
+                    <li>
+                        <button class="btn2" onclick="window.location='/registro';">Registrarse</button>
+                    </li>
+                </ul>
+            </form>
+        </div>
+    <!--</div>-->
+</div>
+

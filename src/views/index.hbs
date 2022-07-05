@@ -1,0 +1,176 @@
+<link rel="stylesheet" href="styles/index2.css">
+<link rel="stylesheet" href="styles/viewFile.css">
+<link rel="stylesheet" type="text/css" href="styles/datatables/datatables.min.css"/>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="styles/datatables/datatables.min.js"></script>
+<script type="text/javascript" src="js/forms.js"></script>
+<script type="text/javascript" src="js/docToText.js"></script>
+<script type="text/javascript" src="js/searchContent.js"></script>
+<script type="text/javascript" src="js/downloadFile.js"></script>
+<script type="text/javascript" src="js/fileStats.js"></script>
+<!--<script type="text/javascript" src="js/chart.js"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js" integrity="sha512-GMGzUEevhWh8Tc/njS0bDpwgxdCJLQBWG3Z2Ct+JGOpVnEmjvNx6ts4v6A2XJf1HOrtOsfhv3hBKpK9kE5z8AQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script type="text/javascript" src="js/fileTableFormat.js"></script>
+
+<script> 
+  function buscarAjax(){
+      var input = document.getElementById("input_busqueda");
+      var radio = document.querySelector('input[name="tipo_busqueda"]:checked').value;
+      var data =  JSON.stringify({ string_search: input.value.toLocaleLowerCase() , tipo_busqueda : radio })
+
+      const http = new XMLHttpRequest();
+      http.open("POST", "/search-file", true);
+      http.responseType= "document";
+
+      http.onreadystatechange = function (){
+          if (this.readyState == 4 && this.status == 200){
+              var myHtml = this.response;
+              console.log(myHtml)
+              document.getElementById("tabla_archivos").innerHTML = myHtml.getElementById("tabla_archivos").outerHTML;
+              tableReload();
+          }
+      }
+      
+      http.setRequestHeader('Content-Type', 'application/json');
+      http.send(data);
+  }
+</script>
+
+<script>
+  function imprimirVentana(f){
+    document.getElementsByTagName('header')[0].innerHTML += `
+      <div id="blur" onclick="hideView()">_</div>
+      <dialog id="view" open>
+        <h3><span onclick="hideView()"><ion-icon name="close-outline"></ion-icon></span></h3>
+        <div id='viewAux'>
+          <div class='viewBody'" >
+          {{>estadisticas 
+              nombre='${f.nombre}'
+              ext='${f.ext}'
+              parrafos='${f.parrafos}'
+              lineas='${f.lineas}'
+              palabras='${f.palabras}'
+              palabrasUnicas='${f.palabrasUnicas}'
+              caracteres='${f.caracteres}'
+              frecuencias='${f.frecuencias}'
+              masFrecuentes='${f.masFrecuentes}'
+          }}
+          </div>
+        </div>
+      </dialog>
+  `;
+  }
+
+</script>
+
+
+
+
+<div id="contenido">
+
+<table id="tabla_busqueda" width="100%">
+    <!--<form action="search-file" method="POST">-->
+    <tr>
+        <td width="30%"> <input id="input_busqueda" name="string_search" type="text" placeholder="Ingresa el título"> </td>
+        <td width="5%"> <button  id="search_button" onclick="buscarAjax()"><ion-icon id="search_icon" name="search"></ion-icon></button> </td>
+        <td>
+            <ul>
+                <li>
+                    <input class="radioBusqueda" type="radio" name="tipo_busqueda" value="0" onclick="changeSearch(this,'input_busqueda')" checked> <span class="radioBusquedaSpan">Buscar por título</span>
+                </li>
+                <li>
+                    <input class="radioBusqueda" type="radio" name="tipo_busqueda" value="1" onclick="changeSearch(this,'input_busqueda')"> <span class="radioBusquedaSpan">Buscar por contenido</span>
+                </li>
+            </ul>
+        </td>
+    </tr>
+    <!--</form>-->
+</table>
+<div id="table-scroll">
+<table id="tabla_archivos" width="100%">
+  <thead style="background-position !important: center;">
+    <tr>
+      <th>Nombre
+{{#if datosBusqueda}}
+<div id="loading">
+<img width="15px" src="images/loading.gif">
+<img style="visibility: hidden;" id="{{string_search}}" onerror="filtrarPorContenido('{{datosBusqueda}}','{{string_search}}')" src="{{string_search}}">
+</div>
+{{/if}}
+    </th>
+      <th>Fecha</th>
+      <th>Tamaño</th>
+      <th>Autor</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#if archivos}}
+    {{#each archivos}}
+    <tr class="{{extension}}" onclick="preview(this,{{nivel}})">
+      <td class="nombre" title="{{nombre}}"><i class="{{extension}}" style="margin-right:5px;"></i>{{nombre}}</td>
+      <td class="fecha" title="{{fecha}}">{{fecha}}</td>
+      <td class="tamano">{{tamano}}</td>
+      <td class="propietario"><span>{{propietario}}</span><input type="hidden" value="{{ubicacion}}"></td>
+    </tr>
+    {{/each}}
+    {{else}}<br>No hay archivos disponibles{{/if}}
+    </tbody>
+</table>
+
+</div>
+
+
+
+<footer>
+        <button id="btn_subir" class="btn1" onclick="window.location='/subir-archivo';">Subir archivo <i class="fa fa-upload"></i></button>
+</footer>
+
+</div>
+<aside id="lateral" style="visibility: hidden;">
+  <div style="margin: 10px; width:100%"><br>
+    <div style="text-align:start;"><ion-icon name="arrow-forward-outline" onclick="hidePreview()"></ion-icon></div>
+    <i id="file-icon" class="fa fa-file"></i><br><br>
+    <table>
+      <li style="color:dimgrey;">Nombre del archivo:</li>
+      <li id='nombrePrev'></li><br>
+      <li style="color:dimgrey;">Tipo de archivo:</li>
+      <li id='tipoPrev'></li><br>
+      <li style="color:dimgrey;">Tamaño:</li>
+      <li id='tamanoPrev'></li><br>
+      <li style="color:dimgrey;">Fecha de creación:</li>
+      <li id='fechaPrev'></li><br>
+      <li style="color:dimgrey;">Autor:</li>
+      <li id='autorPrev'></li><br>
+      <li style="color:dimgrey;">Nivel del archivo:</li>
+      <li id='nivelPrev'></li><br>
+      <li><button class="btn1" id="descargaPrev">Descargar <i class="fa fa-download"></i></button></li><br>
+      <li><button class="btn1" id="showPrev" onclick="">Visualizar <i class="fa fa-eye"></i></button></li><br>
+      <li><button class="btn1" id="showStats" onclick="">Analizar <i class="fa fa-bar-chart"></i></button></li><br>
+    </table>
+  </div>
+</aside>
+
+
+<!--<script type="text/javascript" src="js/fileTableFormat.js"></script>-->
+
+
+<!--script-->
+
+<script> 
+  var table;
+      window.history.pushState("", "", '/');
+      fileTableFormat();
+      $(document).ready( function () {
+        table = $('#tabla_archivos').DataTable({
+          "bPaginate": false,
+          columnDefs: [{ type: 'file-size', targets: 2 }],
+          order: [0, 'desc'],
+          language: {
+            'search': 'Filtrar: ',
+            'info': '',
+            'lengthMenu': 'Mostrar _MENU_ resultados',
+          }
+        });
+     });
+</script>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<script type="text/javascript" src="js/docToText.js"></script>
+
+<script>
+const url = 'https://firebasestorage.googleapis.com/v0/b/limaforsch.appspot.com/o/userFiles%2FAlma%2FACTIVIDAD%201.4%20Cuestionario%20propuestas%20contempor%C3%A1neas.pdf?alt=media&token=1835fa66-d826-4a47-bfc2-7c37cbac5258';
+
+const docToText = new DocToText();
+docToText.extractToText(url, 'docx')
+.then(function (text) {
+  console.log(text)
+}).catch(function (error) {
+  console.log(error)
+});
+
+</script>
+
+
+
+<html lang="en">
+<body>
+    
+</body>
+</html>

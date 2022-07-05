@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/main2.css">
+    <link rel="icon" href="images/icon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter&family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <title>Lima Forsch</title>
+</head>
+<body>
+    <header>
+        <img id="logo" src="images/logo_lima.png" onclick="window.location='/';"></img>      
+        <div id="aux">
+            {{#if session.usuario}}
+            <div id="nombre_usuario">Usuario: {{session.usuario}}<br>Nivel:{{session.rol}}</div>
+            {{/if}}
+        <form style="align-self: self-end;" action="/logout" method="POST"> 
+            <button type="submit" id="logout" onclick="window.location='/login';">Cerrar sesión</button>
+        </form>
+        </div>
+        
+    </header>
+    {{{body}}}
+</body>
+
+</html>

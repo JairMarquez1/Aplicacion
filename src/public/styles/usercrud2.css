@@ -1,0 +1,275 @@
+body{
+    background: white;
+}
+
+#contenido{
+    width: 100%;
+    float: left;
+    transition: all 0.5s ease-in-out;
+    border-radius: 0 0 0 10px;
+    border: 1px solid lightgray;
+    border-top: none;
+    background: white;
+}
+
+/*-----------Barra busqueda----------*/
+
+#tabla_busqueda{
+    padding-left: 10px;
+    height: 44px;
+}
+
+
+#input_busqueda{
+    padding: 2% 2%;
+    border: none;
+    border-bottom: 2px solid gray;
+    width: 95%;
+    outline: none;
+    font-size: 18px;
+    cursor: text;
+}
+
+#input_busqueda::placeholder{
+    color:rgb(128, 128, 128);
+    transition: all 0.3s ease-out;
+}
+
+#input_busqueda:focus{
+    border-bottom: 2px solid #13c52e;
+  }
+
+#input_busqueda:focus::placeholder{
+    color:rgb(128, 128, 128,0);
+    transition: all 0.3s ease-out;
+}
+
+#search_icon{
+    font-size: 28px;
+    color: gray;
+}
+
+#search_icon:hover{
+    filter: drop-shadow(1px 1px 5px #8EEC92);
+    color: #13c52e;
+    cursor: pointer;
+}
+
+/*-----------Tabla usuarios----------------*/
+
+#table-scroll {
+    padding: 0 10px 0px 10px;
+    height: 40vh; /*60vh*/
+    overflow:auto; 
+}
+
+th{
+    background-color: white;
+    padding: 8px 5px;
+    text-align: left;
+}
+
+#tabla_usuarios, #tabla_usuarios_header{
+    border-collapse:separate;
+    border-spacing:0px 0px;  
+    table-layout: fixed; 
+    white-space: nowrap;
+}
+
+
+#tabla_usuarios td{
+    padding: 5px 5px;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    border-top: 1px solid rgb(173, 173, 173);
+}
+
+#tabla_usuarios tr:hover{
+    filter: brightness(0.985);
+    cursor: pointer;
+    transition: all 0.1s ease-out;
+}
+
+.tr-usuario-off{
+    color: rgb(158, 158, 158);
+}
+
+.tr-usuario-off td{
+    background-color: #EFEFEF;
+}
+
+.td-tipo{
+    width: 21%;
+    text-align: center !important;
+}
+
+.mod-btn{
+    color: white;
+    cursor: pointer;
+    border: none;
+    border-radius: 3px;
+    background: #28a745;
+    padding: 4px 5px;
+}
+
+.mod-btn:hover{
+    background: #218838;
+    transition: all 0.3s ease-out;
+}
+
+.hab-btn{
+    color: black;
+    cursor: pointer;
+    border: none;
+    border-radius: 3px;
+    background: transparent;
+    font-size: 20px;
+    padding-right: 20px;
+}
+
+.hab-btn i:hover{
+    transform: scale(1.1);
+    /*background: #616161;*/
+    transition: all 0.3s ease-out;
+    cursor: pointer;
+}
+
+.fa-pencil:hover{
+    color: dodgerblue;
+}
+
+.fa-toggle-on:hover{
+    color: darkred;  
+}
+
+.fa-toggle-off:hover{
+    color: green;
+}
+
+
+
+
+#tabla_usuarios tr:nth-child(even) {background: white/*#EFEFEF*/}
+#tabla_usuarios tr:nth-child(odd) {background: white/*#E5F6EC*/}
+
+/*----------Footer----------*/
+
+footer{
+    border-top: 1px solid lightgray;
+    border-radius: 0 0 10px 10px;
+    height: auto;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.001s ease-in-out;
+    padding: 10px 0px;
+}
+
+#btn_nuevo_usuario{
+    color: white;
+    margin-top: 10px;
+    border: none;
+    width: 100%;
+    background-color: gray;
+    border-radius: 3px;
+    padding: 1%;
+}
+
+#error{
+    margin: 4px 0px;
+    text-align: center;
+    font-size: 14px;
+    background-color: salmon;
+}
+
+/*----------Formulario agregar usuario----------*/
+#tabla_form_add{
+    padding: 4px 8px;
+    width: 100%;
+    background-color: #E5F6EC;
+    border-radius: 0 0 5px 5px;
+    font-size: 14px;
+    transition: all 1s ease-in-out;
+}
+
+#tabla_form_add td{
+    width: 20%;
+}
+
+.input_form{
+    width: 90%;
+    border: none;
+    border-bottom: 2px solid black;
+    background-color: transparent;
+    cursor: text;
+}
+
+#tabla_form_add td{
+    text-align: center;
+}
+
+.input_form:focus{
+    border-bottom: 2px solid green;
+    outline: none;
+    color: green;
+}
+
+#input_nivel, #input_nivel_modify{
+    text-align: center;
+}
+
+
+/*----------Formulario modificar usuario----------*/
+#modifyUser{
+    border-radius: 5px;
+    background-color: #E5F6EC;  
+    background: dodgerblue;
+}
+
+#modifyUser h3{
+    color: white;
+    font-weight: 100;
+    font-size: 14px;
+    border-bottom: 1px solid black;
+    padding: 1% 0px;
+    text-align: center;
+}
+
+.chbx{
+    cursor: pointer;
+    border: 1px solid black;
+    border-radius: 3px;
+    background: #e4e4e473;
+    padding: 1px 5px;
+}
+
+
+
+
+@media (max-width:990px){
+    #input_busqueda, #search_icon, #tabla_form_add td, .mod-btn, .btn2, input{
+        font-size: 1.7vw;
+    }
+    #tabla_usuarios, #tabla_usuarios_header, #input_busqueda, #search_icon, .hab-btn{
+        font-size: calc(10px + 0.7vw);
+        padding-right: 3px;
+    }
+    #tabla_usuarios_header th{
+        padding: 2px 5px;
+    }
+    #tabla_usuarios_header{
+        height: 20px;
+        padding: 0 0 0 1px;
+    }
+    .btn2, .mod-btn, .hab-btn{
+        padding: 2px 5px;
+    }
+    #modifyUser h3{
+        font-size: 2vw;
+    }
+    .hab-btn{
+        /*width: 5em;*/
+    }
+    #tabla_usuarios{
+        padding: 0 0 0 1px;
+    }
+}

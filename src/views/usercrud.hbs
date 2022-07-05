@@ -1,0 +1,171 @@
+<link rel="stylesheet" href="styles/usercrud2.css">
+<script type="text/javascript" src="js/forms.js"></script>
+
+<script>
+    function buscarAjax(){
+        var input = document.getElementById("input_busqueda");
+        var data =  JSON.stringify({ string_search: input.value })
+
+        const http = new XMLHttpRequest();
+        http.open("POST", "/search-user", true);
+        http.responseType= "document";
+
+        http.onreadystatechange = function (){
+            if (this.readyState == 4 && this.status == 200){
+                console.log('hola',this.response);
+                var myHtml = this.response;
+                document.getElementById("tabla_usuarios").innerHTML = myHtml.getElementById("tabla_usuarios").outerHTML;
+            }
+        }
+        
+        http.setRequestHeader('Content-Type', 'application/json');
+        http.send(data);
+    }
+    function modificarAjax(e){
+        var valor = e.value;
+        const http = new XMLHttpRequest();
+        http.open("POST", "/usercrud", true);
+        http.responseType= "document";
+
+        http.onreadystatechange = function (){
+            if (this.readyState == 4 && this.status == 200){
+                var myHtml = this.response;
+                document.getElementById("modifyUser").innerHTML = myHtml.getElementById("modifyUser").outerHTML;
+            }
+        }
+        
+        http.setRequestHeader('Content-Type', 'application/json');
+        http.send(JSON.stringify({modifyUser : valor}));
+    }
+    function cambiarAjax(e){
+        if (confirm('¿Desea cambiar el estado del usuario?')){
+            var valor = e.value;
+            const http = new XMLHttpRequest();
+            http.open("POST", "/usercrud", true);
+            http.responseType= "document";
+
+            http.onreadystatechange = function (){
+                if (this.readyState == 4 && this.status == 200){
+                    var myHtml = this.response;
+                }
+            }
+            
+            http.setRequestHeader('Content-Type', 'application/json');
+            http.send(JSON.stringify({enableUser : valor}));
+
+            var tr = e.parentNode.parentNode;
+            if (tr.className == "tr-usuario-on"){
+                tr.className = "tr-usuario-off";
+                e.innerHTML = `<i class="fa fa-toggle-off"></i>`;
+            }
+            else{
+                tr.className = "tr-usuario-on";
+                e.innerHTML = `<i class="fa fa-toggle-on"></i>`;
+            }
+        }
+    }
+</script>
+
+
+
+<div id="contenido">
+    
+<!--Menú para buscar usuarios-->
+<table id="tabla_busqueda" width="50%">
+        <td> <input id="input_busqueda" type="text" placeholder="Buscar usuario" name="string_search" autocomplete="on" onkeyup="/*buscarAjax()*/"> </td>
+        <td> <button onclick="buscarAjax()"><ion-icon id="search_icon" name="search"></ion-icon></ion-icon> </button></td>
+</table>
+
+<!--Se enlistan los usuarios en una tabla con scroll-->
+<div id="table-scroll">
+<table id="tabla_usuarios" width="100%">
+    <tr>
+      <th class="td-user">Usuario</th>
+      <th class="td-correo">Correo</th>
+      <th class="td-tipo">Nivel</th>
+      <th class="td-acc">Acciones</th>
+  </tr>
+    {{#if usuarios}}{{else}}<tr><td>No se encontraron coincidencias</td></tr>{{/if}}
+    {{#each usuarios}}
+    <tr id="{{usuario}}" {{#if estado}}class="tr-usuario-on"{{else}}class="tr-usuario-off"{{/if}}>
+        <td><i class="fa fa-user"> &nbsp</i>{{usuario}}</td>
+        <td>{{correo}}</td>
+        <td class="td-tipo">{{nivel}}</td>
+        <td class="td-acc">
+            <!--<form method="POST">-->
+                <button class="hab-btn" type="submit" name="modifyUser" value="{{usuario}}" onclick="modificarAjax(this)"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                <button class="hab-btn" type="submit" name="enableUser" value="{{usuario}}" onclick="cambiarAjax(this)">{{#if estado}}<i class="fa fa-toggle-on"></i>{{else}}<i class="fa fa-toggle-off"></i>{{/if}}</button>
+            <!--</form>-->
+        </td>
+    </tr>
+    {{/each}}
+
+</table>
+</div>
+<footer>
+    <div style="width:80vw; margin:auto">
+        <!--_________________Mensaje de error______________-->
+        {{#if errorMsg}}
+            <div id="error">{{errorMsg}}</div>
+        {{/if}}
+
+        <!--_________________Modificar usuario______________-->
+        
+        <div id="modifyUser">
+            {{#if modifyUser}}
+            <h3>Modificar usuario: {{modifyUser.usuario}}</h3>
+            <form name="modifyForm" action="/modify-user" method="POST" onsubmit="">
+                <table id="tabla_form_add" style="visibility: ;">
+                    <tr>
+                        <td>Nombre</td>
+                        <td>Contraseña</td>
+                        <td>Correo</td>
+                        <td>Nivel</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><label>{{modifyUser.usuario}}</label></td>
+                        <td><!--<input type="hidden" name="pass_modify" value="0"> <label class="chbx" onclick="checkBox(this,'pass_modify','Se generará una contraseña y se enviará al correo asignado al usuario')">Restablecer--></label>*****</td>
+                        <td><input id="input_email_modify" name="email_modify" class="input_form" type="email" onclick="color(this)" required value="{{modifyUser.correo}}"></td>
+                        <td><input id="input_nivel_modify" name="nivel_modify" class="input_form" type="number" min="1" max="3" onclick="color(this)" required value="{{modifyUser.nivel}}"></td>
+                        <td><input type="submit" class="btn2" value="Guardar"></td>
+                    </tr>
+                </table>
+            </form>
+            {{/if}}  
+        </div> 
+
+        <!--_________________Agregar usuario______________-->
+        <button id="btn_nuevo_usuario" onclick="dropMenu(`agregarUsuario`)">Agregar nuevo usuario</button>
+        <div id="agregarUsuario" style="display:none;">
+            <form name="registerForm" action="/add-user" method="POST" onsubmit="return validateRegisterForm()">
+                <table id="tabla_form_add">
+                    <tr>
+                        <td>Nombre</td>
+                        <td>Contraseña <ion-icon name="eye-off-outline" id="showIcon" onclick="showPass(`showIcon`)"></ion-icon></td>
+                        <td>Correo</td>
+                        <td>Nivel</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><input id="input_nombre" name="nombre_registro" class="input_form" type="text" onclick="color(this)" required autocomplete="on"></td>
+                        <td><input id="input_contrasena" name="contrasena_registro" class="input_form" type="password" onclick="color(this)" required autocomplete="on"></td>
+                        <td><input id="input_email" name="email_registro" class="input_form" type="email" onclick="color(this)" required autocomplete="on"></td>
+                        <td><input id="input_nivel" name="nivel_registro" class="input_form" type="number" min="1" max="3" value="1" onclick="color(this)" required></td>
+                        <td><input type="submit" class="btn2" value="Agregar"></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+
+        
+
+    </div>
+
+</footer>
+
+
+</div>
+
+
+
