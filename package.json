@@ -4,7 +4,16 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon src/index.js",
-    "start": "node src/index.js"
+    "start": "node src/index.js",
+    "heroku-prebuild": "npm install -f",
+    "heroku-postbuild": "npm run prod",
+    "dev": "react-scripts start",
+    "start": "serve -s build",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "heroku-postbuild": "npm run build"
+
   },
   "author": "",
   "license": "ISC",
@@ -21,15 +30,5 @@
   "devDependencies": {
     "nodemon": "^2.0.14"
   },
-  "description": "",
-  "scripts": {
-    "heroku-prebuild": "npm install -f",
-    "heroku-postbuild": "npm run prod",
-    "dev": "react-scripts start",
-    "start": "serve -s build",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "heroku-postbuild": "npm run build"
-  }
+  "description": ""
 }
