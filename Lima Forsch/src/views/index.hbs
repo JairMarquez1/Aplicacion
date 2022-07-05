@@ -43,7 +43,7 @@
       <dialog id="view" open>
         <h3><span onclick="hideView()"><ion-icon name="close-outline"></ion-icon></span></h3>
         <div id='viewAux'>
-          <div class='viewBody'" >
+          <div class='viewBody'>
           {{>estadisticas 
               nombre='${f.nombre}'
               ext='${f.ext}'
@@ -107,10 +107,10 @@
     {{#if archivos}}
     {{#each archivos}}
     <tr class="{{extension}}" onclick="preview(this,{{nivel}})">
-      <td class="nombre" title="{{nombre}}"><i class="{{extension}}" style="margin-right:5px;"></i>{{nombre}}</td>
-      <td class="fecha" title="{{fecha}}">{{fecha}}</td>
-      <td class="tamano">{{tamano}}</td>
-      <td class="propietario"><span>{{propietario}}</span><input type="hidden" value="{{ubicacion}}"></td>
+      <td class="nombre" title="{{nombre}}" style="font-size: 90%;"><i class="{{extension}}" style="margin-right:5px; padding: 6px;"></i>{{nombre}}</td>
+      <td class="fecha" title="{{fecha}}" style="font-size: 90%;">{{fecha}}</td>
+      <td class="tamano" style="font-size: 90%;">{{tamano}}</td>
+      <td class="propietario" style="font-size: 90%;"><span>{{propietario}}</span><input type="hidden" value="{{ubicacion}}"></td>
     </tr>
     {{/each}}
     {{else}}<br>No hay archivos disponibles{{/if}}
@@ -122,7 +122,7 @@
 
 
 <footer>
-        <button id="btn_subir" class="btn1" onclick="window.location='/subir-archivo';">Subir archivo <i class="fa fa-upload"></i></button>
+    <button id="btn_subir" class="btn1" onclick="window.location='/subir-archivo';" style="padding: 15px;">Subir archivo <i class="fa fa-upload"></i></button>
 </footer>
 
 </div>
@@ -131,21 +131,21 @@
     <div style="text-align:start;"><ion-icon name="arrow-forward-outline" onclick="hidePreview()"></ion-icon></div>
     <i id="file-icon" class="fa fa-file"></i><br><br>
     <table>
-      <li style="color:dimgrey;">Nombre del archivo:</li>
+      <li style="color:dimgrey; padding-bottom: 8px;">Nombre del archivo:</li>
       <li id='nombrePrev'></li><br>
-      <li style="color:dimgrey;">Tipo de archivo:</li>
+      <li style="color:dimgrey; padding-bottom: 8px;">Tipo de archivo:</li>
       <li id='tipoPrev'></li><br>
-      <li style="color:dimgrey;">Tamaño:</li>
+      <li style="color:dimgrey; padding-bottom: 8px;">Tamaño:</li>
       <li id='tamanoPrev'></li><br>
-      <li style="color:dimgrey;">Fecha de creación:</li>
+      <li style="color:dimgrey; padding-bottom: 8px;">Fecha de creación:</li>
       <li id='fechaPrev'></li><br>
-      <li style="color:dimgrey;">Autor:</li>
+      <li style="color:dimgrey; padding-bottom: 8px;">Autor:</li>
       <li id='autorPrev'></li><br>
-      <li style="color:dimgrey;">Nivel del archivo:</li>
+      <li style="color:dimgrey; padding-bottom: 8px;">Nivel del archivo:</li>
       <li id='nivelPrev'></li><br>
-      <li><button class="btn1" id="descargaPrev">Descargar <i class="fa fa-download"></i></button></li><br>
-      <li><button class="btn1" id="showPrev" onclick="">Visualizar <i class="fa fa-eye"></i></button></li><br>
-      <li><button class="btn1" id="showStats" onclick="">Analizar <i class="fa fa-bar-chart"></i></button></li><br>
+      <li><button class="btn1" id="descargaPrev" style="font-size: 90%; padding: 10px; margin-bottom: 10px;">Descargar <i class="fa fa-download"></i></button></li>
+      <li><button class="btn1" id="showPrev" onclick="" style="font-size: 90%; padding: 10px; margin-bottom: 10px;">Visualizar <i class="fa fa-eye"></i></button></li>
+      <li><button class="btn1" id="showStats" onclick="" style="font-size: 90%; padding: 10px; margin-bottom: 10px;">Analizar <i class="fa fa-bar-chart"></i></button></li><br>
     </table>
   </div>
 </aside>
