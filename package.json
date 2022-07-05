@@ -21,5 +21,9 @@
   "devDependencies": {
     "nodemon": "^2.0.14"
   },
-  "description": ""
+  "description": "",
+  "scripts": {
+    "heroku-prebuild": "npm install -f",
+    "heroku-postbuild": "npm run prod"
+  }
 }
