@@ -1,0 +1,87 @@
+header{
+    text-align: center;
+    display: block;
+    height: 10vh;
+    border: none;
+}
+
+#logo{
+    height: 10vh;
+}
+
+html{
+    padding: 100px 20vw;
+}
+
+body{
+    border: 1px solid lightgray;    
+}
+
+#contenido{
+    text-align: center;
+    padding: 30px 0;
+}
+
+span{
+    text-align: left;
+}
+
+#logout{
+    display: none;
+}
+
+.inpt1{
+    border: 1px solid rgb(128, 128, 128);
+    background-color: rgb(243, 243, 243);
+    font-size: 16px;
+    padding: 4px 5px;
+    margin-top: 4px;
+}
+
+#login_body li{
+    margin-top: 8px;
+    font-size: 16px;
+}
+
+#btn_iniciar{
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 16px
+}
+
+#usuario, #contrasena, #btn_iniciar{
+    width: 300px;
+}
+
+#error{
+    font-size: 16px;
+    color: red;
+}
+
+@media (max-width:600px){
+    .btn2, #btn_iniciar, li, span, a{
+        font-size: 14px;
+        padding: 5px;
+    }
+    #login_body li{
+        margin-top: 4px;
+    }
+    #usuario, #contrasena, #btn_iniciar{
+        width: 70%;
+    }
+    html{
+        padding: 10vh 5vw;
+    }
+
+}
+
+@media (max-height:800px){
+    .btn2, #btn_iniciar, li, span, a{
+        font-size: 14px;
+        padding: 5px;
+        margin-top: 0;
+    }
+    header, #logo{
+        height: 60px;
+    }
+}

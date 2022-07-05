@@ -1,0 +1,38 @@
+<link rel="stylesheet" href="styles/file-stats.css">
+
+
+<h2><i class="fa fa-bar-chart"></i> {{nombre}}</h2>
+<div id="divTabla">
+    <table>
+        <tr>
+            <td>Caracteres:</td><td>{{caracteres}}</td>
+        </tr>
+        <tr>
+            <td>Palabras totales:</td><td>{{palabras}}</td>
+        </tr>
+        <tr>
+            <td>Palabras distintas:</td><td>{{palabrasUnicas}}</td>
+        </tr>
+        <tr id="lin">
+            <td>Lineas:</td><td>{{lineas}}</td>
+        </tr>
+        <tr id="parr">
+            <td>Parrafos:</td><td>{{parrafos}}</td>
+        </tr>
+    </table>
+</div>
+
+<div id="grafica" style="">
+    <h2>Palabras más frecuentes:</h2>
+    <canvas id="miGrafica"></canvas>
+</div>
+
+
+
+<div style="visibility: hidden;">
+    {{frecuencias}}
+    {{masFrecuentes}}
+</div>
+
+
+
