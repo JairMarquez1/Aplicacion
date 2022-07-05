@@ -14,18 +14,20 @@
                         <input class="inpt1" id="contrasena" type="password" name="contrasena" required><br>
                     </li>
                     <li>
-                        <button class="btn2" id="btn_iniciar">Iniciar sesión</button>
+                        <button class="btn2" id="btn_iniciar" style="padding: 10px;">Iniciar sesión</button>
                     </li>
+                    <!--
                     <li>
                         <a href="#">Recuperar contraseña</a>
                     </li>
+                    -->
                     <li>
                         {{#if errorMsg}}
                             <div id="error">{{errorMsg}}</div>
                         {{/if}}
                     </li>
                     <li>
-                        <button class="btn2" onclick="window.location='/registro';">Registrarse</button>
+                        <button class="btn2" onclick="window.location='/registro';" style="padding: 10px;">Registrarse</button>
                     </li>
                 </ul>
             </form>
