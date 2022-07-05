@@ -100,7 +100,7 @@ async function obtenerUrls(){
     for (var i = 0; i < direcciones.length; i++){
         var url = await bucket.file(direcciones[i]).getSignedUrl({
             action: 'read',
-            expires: '01-01-2022'
+            expires: '01-01-2040'
           });
         datos[i].ubicacion = url[0];
     }
